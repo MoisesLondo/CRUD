@@ -3,6 +3,10 @@ class Form
     constructor()
     {
         const form = document.createElement("form");
+        const container = document.createElement('div');
+        const containerMain = document.createElement('div');
+        containerMain.className = "w-full flex flex-col items-center";
+        container.className = 'p-5 rounded-xl shadow';
         form.className = "flex flex-col gap-2";
         form.innerHTML = 
         `
@@ -35,7 +39,9 @@ class Form
                 </select>
             </div>
         `;
-        document.body.appendChild(form);
+        container.appendChild(form)
+        containerMain.appendChild(container);
+        document.body.appendChild(containerMain);
     }   
 }
 
