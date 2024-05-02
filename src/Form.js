@@ -3,7 +3,7 @@ class Form
     constructor()
     {
         const form = document.createElement("form");
-        form.className = "flex flex-col items-center";
+        form.className = "flex flex-col gap-2";
         form.innerHTML = 
         `
             <div>
