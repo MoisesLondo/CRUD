@@ -4,7 +4,8 @@ import Tr from "./Tr.js";
 class Form 
 {
     constructor()
-    {
+    {   
+        this.id = 1
         const form = document.createElement("div");
         const container = document.createElement('div');
         const containerMain = document.createElement('div');
@@ -43,7 +44,7 @@ class Form
     }
 
     extractionsDatos()
-    {
+    {   
         const name = document.getElementById("name").value;
         const lastname = document.getElementById("lastName").value;
         const idn = document.getElementById("ced").value;
@@ -51,6 +52,8 @@ class Form
         const address = document.getElementById("address").value;
         // return {name, lastname, idn, tlf, address};
 
+
+        localStorage.setItem("id", this.id)
         localStorage.setItem("name", name);
         localStorage.setItem("lastname", lastname);
         localStorage.setItem("idn", idn);
