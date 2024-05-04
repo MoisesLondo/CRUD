@@ -1,3 +1,4 @@
+import Tr from "./Tr.js";
 class Table 
 {
     list = [];
@@ -34,4 +35,22 @@ class Table
         this.containerMiniTr.appendChild(obj1)
     }
 }
+
+
+
+const name = localStorage.getItem("name")
+const lastname = localStorage.getItem("lastname")
+const idn = localStorage.getItem("idn")
+const tlf = localStorage.getItem("tlf")
+const address = localStorage.getItem("address")
+
+
+
+
+const table = new Table()
+const tr = new Tr(1, name, lastname, idn, tlf, address)
+table.list.push(tr)
+
+table.Add(tr.getTr(), tr.getMiniTr())
+
 

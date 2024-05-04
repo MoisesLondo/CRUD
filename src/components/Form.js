@@ -49,8 +49,22 @@ class Form
         const idn = document.getElementById("ced").value;
         const tlf = document.getElementById("tlf").value;
         const address = document.getElementById("address").value;
-        return {name, lastname, idn, tlf, address};
-    }   
-}
+        // return {name, lastname, idn, tlf, address};
 
+        localStorage.setItem("name", name);
+        localStorage.setItem("lastname", lastname);
+        localStorage.setItem("idn", idn);
+        localStorage.setItem("tlf", tlf);
+        localStorage.setItem("address", address);
+    }
+}
 const form = new Form();
+const boton = document.getElementById("buton")
+
+boton.addEventListener("click", (e) =>{
+    e.preventDefault();
+    form.extractionsDatos()
+    alert("Los datos del comprador se han guardado.");
+    window.location.href = "home.html"
+})
+
