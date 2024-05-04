@@ -1,14 +1,28 @@
-export default class List{
+class List{
 
     constructor(){
-
         this.list = []
+        this.id= 1;
     }
     
-    add(tr){
+    Add(tr){
         this.list.push(tr)
+        this.id+= 1;
     }
 
+    getIndex(i)
+    {
+        return this.list.indexOf(i);
+    }
+    getList()
+    {
+        return this.list;
+    }
+
+    getId()
+    {
+        return this.id;
+    }
 }
 
-const list = new List()
+export const list = new List()

@@ -1,5 +1,5 @@
 import Tr from "./Tr.js";
-import {list} from "../objects/lists.js"
+import {list} from "../objects/lists.js";
 class Table 
 {
     table = document.createElement('table');
@@ -36,27 +36,18 @@ class Table
     }
 }
 
-
-const id = localStorage.getItem("id")
+const table = new Table()
 const name = localStorage.getItem("name")
 const lastname = localStorage.getItem("lastname")
 const idn = localStorage.getItem("idn")
 const tlf = localStorage.getItem("tlf")
 const address = localStorage.getItem("address")
 
-
-
-
-const table = new Table()
-const tr = new Tr(id, name, lastname, idn, tlf, address)
-
-let id1 = id + 1
-localStorage.setItem("id", id1)
-list.add(tr)
-console.log(list)
-
-list.forEach(tr => {
-    table.Add(tr.getTr(), tr.getMiniTr())
-})
+const tr = new Tr(list.getId(), name, lastname, idn, tlf, address)
+list.Add(tr)
+list.getList().forEach(item => 
+    {
+        table.Add(item.getTr(), item.getMiniTr());
+    })
 
 
