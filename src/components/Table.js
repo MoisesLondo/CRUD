@@ -1,5 +1,3 @@
-import Tr from './Tr.js';
-
 class Table 
 {
     list = [];
@@ -16,11 +14,11 @@ class Table
         this.table.innerHTML= 
         `
             <thead class="bg-gray-50 border-b-2 border-gray-200">
-                <th class="p-3 text-sm font-semibold tracking-wide text-left">Titulo 1</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-left">Titulo 2</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-left">Titulo 3</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-left">Titulo 4</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-left">Titulo 5</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-left">Nombre</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-left">Apellido</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-left">Cedula</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-left">Telefono</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-left">Direccion</th>
             </thead>
             <tbody class="divide-y divide-gray-100"></tbody>
         `;
@@ -37,10 +35,3 @@ class Table
     }
 }
 
-const table = new Table();
-const tr = new Tr(1, "Luis");
-table.Add(tr.getTr(), tr.getMiniTr());
-const tr1 = new Tr(2, "Isidoro");
-table.Add(tr1.getTr(), tr1.getMiniTr());
-const tr2 = new Tr(3, "MiNombleEsBo");
-table.Add(tr2.getTr(), tr2.getMiniTr());
