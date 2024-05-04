@@ -10,7 +10,7 @@ class Table
     constructor()
     {
         this.containerMain.className = "flex flex-col items-center";
-        this.container.className = "w-9/12 rounded-lg shadow hidden md:block";
+        this.container.className = "w-11/12 rounded-lg shadow hidden md:block";
         this.containerMiniTr.className = "w-11/12 grid grid-cols-1 gap-4 md:hidden";
         this.table.className = "w-full";
         this.table.innerHTML= 
