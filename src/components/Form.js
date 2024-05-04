@@ -1,3 +1,5 @@
+import People from "../objects/Persona.js";
+
 class Form 
 {
     constructor()
