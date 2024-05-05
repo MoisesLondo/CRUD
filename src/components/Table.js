@@ -1,5 +1,4 @@
 import Tr from "./Tr.js";
-import {list} from "../objects/lists.js";
 class Table 
 {
     table = document.createElement('table');
