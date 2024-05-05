@@ -1,6 +1,7 @@
 import People from "../objects/Persona.js";
 import Tr from "./Tr.js";
-
+import Input from "./Input.js";
+import Button from "./Button.js";
 class Form 
 {
     constructor()
@@ -13,58 +14,21 @@ class Form
         container.className = 'p-4 rounded-xl shadow hidden md:block';
         formMini.className = 'w-10/12 flex flex-col gap-3 p-4 rounded-xl shadow md:hidden';
         form.className = "flex flex-col gap-3";
-        form.innerHTML = 
-        `
-            <div>
-                <label class=""> Nombre </label>
-                <input type="text" id="name" pattern="[A-Za-zñÑ]+" required />
-            </div>
-            <div>
-                <label for="lastName" > Apellido </label>
-                <input type="text" id="lastName" />
-            </div>
-            <div>
-                <label> Cédula </label>
-                <input type="text" id="ced" />
-            </div>
-            <div>
-                <label for="tlf"> Telefono </label>
-                <input type="tel" id="tlf"/>
-            </div>
-            <div>
-                <label for="address"> Direccion </label>
-                <input type="text" id="address"/>
-            </div>
-            <div class="flex gap-5">
-                <button id="buton" class="w-full p-2 bg-rose-400 rounded-lg text-white hover:bg-rose-600 transform-all duration-75 ease-in-out:hover">Siguiente</button>
-            </div>
-        `;
-        formMini.innerHTML = 
-        `
-            <div>
-                <label class=""> Nombre </label>
-                <input type="text" id="miniName" pattern="[A-Za-zñÑ]+" required />
-            </div>
-            <div>
-                <label for="lastName" > Apellido </label>
-                <input type="text" id="miniLastName" />
-            </div>
-            <div>
-                <label> Cédula </label>
-                <input type="text" id="miniCed" />
-            </div>
-            <div>
-                <label for="tlf"> Telefono </label>
-                <input type="tel" id="miniTlf"/>
-            </div>
-            <div>
-                <label for="address"> Direccion </label>
-                <input type="text" id="miniAddress"/>
-            </div>
-            <div class="flex gap-5">
-                <button id="miniButon" class="w-full p-2 bg-rose-400 rounded-lg text-white hover:bg-rose-600 transform-all duration-75 ease-in-out:hover">Siguiente</button>
-            </div>
-        `;
+        
+        form.appendChild(new Input("name", "Nombre", "text", "").getInput());
+        form.appendChild(new Input("lastName", "Apellido", "text", "").getInput());
+        form.appendChild(new Input("ced", "Cedula", "text", "").getInput());
+        form.appendChild(new Input("tlf", "Telefono", "tel", "").getInput());
+        form.appendChild(new Input("address", "Direccion", "text", "").getInput());
+        form.appendChild(new Button("buton", "Siguiente").getButton());
+
+        formMini.appendChild(new Input("miniName", "Nombre", "text", "[A-Za-zñÑ]+").getInput());
+        formMini.appendChild(new Input("miniLastName", "Apellido", "text", "[A-Za-zñÑ]+").getInput());
+        formMini.appendChild(new Input("miniCed", "Cedula", "text", "[A-Za-zñÑ]+").getInput());
+        formMini.appendChild(new Input("miniTlf", "Telefono", "tel", "[A-Za-zñÑ]+").getInput());
+        formMini.appendChild(new Input("miniAddress", "Direccion", "text", "[A-Za-zñÑ]+").getInput());
+        formMini.appendChild(new Button("miniButon", "Siguiente").getButton());
+        
         container.appendChild(form)
         containerMain.appendChild(container);
         document.getElementById("container-wrapped").appendChild(containerMain);
@@ -96,12 +60,13 @@ const form = new Form();
 const boton = document.getElementById("buton");
 const miniBoton = document.getElementById("miniButon");
 let i = 1;
+const trNew = new Tr(i, "Freddy", "Trucazo", "12.343.532", "245-2032121", "Los Santos");
+table.Add(trNew.getTr(), trNew.getMiniTr());
 
 boton.addEventListener("click", (e) =>{
     e.preventDefault();
     const { name, lastname, idn, tlf, address} = form.extractionsDatos();
     const trNew = new Tr(i, name, lastname, idn, tlf, address);
-    console.log(trNew);
     i++;
     table.Add(trNew.getTr(), trNew.getMiniTr());
 })
@@ -110,7 +75,6 @@ miniBoton.addEventListener("click", (e) =>{
     e.preventDefault();
     const { name, lastname, idn, tlf, address} = form.miniExtractionsDatos();
     const trNew = new Tr(i, name, lastname, idn, tlf, address);
-    console.log(trNew);
     i++;
     table.Add(trNew.getTr(), trNew.getMiniTr());
 })
