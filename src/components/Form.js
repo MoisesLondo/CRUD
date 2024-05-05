@@ -43,26 +43,26 @@ class Form
         `
             <div>
                 <label class=""> Nombre </label>
-                <input type="text" id="name" pattern="[A-Za-zñÑ]+" required />
+                <input type="text" id="miniName" pattern="[A-Za-zñÑ]+" required />
             </div>
             <div>
                 <label for="lastName" > Apellido </label>
-                <input type="text" id="lastName" />
+                <input type="text" id="miniLastName" />
             </div>
             <div>
                 <label> Cédula </label>
-                <input type="text" id="ced" />
+                <input type="text" id="miniCed" />
             </div>
             <div>
                 <label for="tlf"> Telefono </label>
-                <input type="tel" id="tlf"/>
+                <input type="tel" id="miniTlf"/>
             </div>
             <div>
                 <label for="address"> Direccion </label>
-                <input type="text" id="address"/>
+                <input type="text" id="miniAddress"/>
             </div>
             <div class="flex gap-5">
-                <button id="buton" class="w-full p-2 bg-rose-400 rounded-lg text-white hover:bg-rose-600 transform-all duration-75 ease-in-out:hover">Siguiente</button>
+                <button id="miniButon" class="w-full p-2 bg-rose-400 rounded-lg text-white hover:bg-rose-600 transform-all duration-75 ease-in-out:hover">Siguiente</button>
             </div>
         `;
         container.appendChild(form)
@@ -81,10 +81,22 @@ class Form
         
         return {name, lastname, idn, tlf, address};
     }
+    miniExtractionsDatos()
+    {   
+        const name = document.getElementById("miniName").value;
+        const lastname = document.getElementById("miniLastName").value;
+        const idn = document.getElementById("miniCed").value;
+        const tlf = document.getElementById("miniTlf").value;
+        const address = document.getElementById("miniAddress").value;
+        
+        return {name, lastname, idn, tlf, address};
+    }
 }
 const form = new Form();
-const boton = document.getElementById("buton")
+const boton = document.getElementById("buton");
+const miniBoton = document.getElementById("miniButon");
 let i = 1;
+
 boton.addEventListener("click", (e) =>{
     e.preventDefault();
     const { name, lastname, idn, tlf, address} = form.extractionsDatos();
@@ -94,3 +106,11 @@ boton.addEventListener("click", (e) =>{
     table.Add(trNew.getTr(), trNew.getMiniTr());
 })
 
+miniBoton.addEventListener("click", (e) =>{
+    e.preventDefault();
+    const { name, lastname, idn, tlf, address} = form.miniExtractionsDatos();
+    const trNew = new Tr(i, name, lastname, idn, tlf, address);
+    console.log(trNew);
+    i++;
+    table.Add(trNew.getTr(), trNew.getMiniTr());
+})
