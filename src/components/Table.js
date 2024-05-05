@@ -1,4 +1,3 @@
-import Tr from "./Tr.js";
 class Table 
 {
     table = document.createElement('table');
@@ -37,5 +36,4 @@ class Table
 
 const table = new Table()
 
-const tr = new Tr(1, "Isidoro", "Navarro", "21.383.923", "0412-2903142", "Malibu");
-table.Add(tr.getTr(), tr.getMiniTr());
+

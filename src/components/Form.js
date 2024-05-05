@@ -78,21 +78,19 @@ class Form
         const idn = document.getElementById("ced").value;
         const tlf = document.getElementById("tlf").value;
         const address = document.getElementById("address").value;
-        // return {name, lastname, idn, tlf, address};
-
-        localStorage.setItem("name", name);
-        localStorage.setItem("lastname", lastname);
-        localStorage.setItem("idn", idn);
-        localStorage.setItem("tlf", tlf);
-        localStorage.setItem("address", address);
+        
+        return {name, lastname, idn, tlf, address};
     }
 }
 const form = new Form();
 const boton = document.getElementById("buton")
-
+let i = 1;
 boton.addEventListener("click", (e) =>{
     e.preventDefault();
-    form.extractionsDatos()
-    alert("Los datos del comprador se han guardado.");
+    const { name, lastname, idn, tlf, address} = form.extractionsDatos();
+    const trNew = new Tr(i, name, lastname, idn, tlf, address);
+    console.log(trNew);
+    i++;
+    table.Add(trNew.getTr(), trNew.getMiniTr());
 })
 
