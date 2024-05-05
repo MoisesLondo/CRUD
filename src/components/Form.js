@@ -10,23 +10,23 @@ class Form
         const formMini = document.createElement('div');
         const container = document.createElement('div');
         const containerMain = document.createElement('div');
-        containerMain.className = "w-auto flex flex-col items-center";
-        container.className = 'p-4 rounded-xl shadow hidden md:block';
+        containerMain.className = "w-1/3 flex flex-col items-center";
+        container.className = 'w-full p-4 rounded-xl shadow hidden md:block';
         formMini.className = 'w-10/12 flex flex-col gap-3 p-4 rounded-xl shadow md:hidden';
         form.className = "flex flex-col gap-3";
         
-        form.appendChild(new Input("name", "Nombre", "text", "").getInput());
-        form.appendChild(new Input("lastName", "Apellido", "text", "").getInput());
-        form.appendChild(new Input("ced", "Cedula", "text", "").getInput());
-        form.appendChild(new Input("tlf", "Telefono", "tel", "").getInput());
-        form.appendChild(new Input("address", "Direccion", "text", "").getInput());
+        form.appendChild(new Input("name", "Nombre", "text", "Isidoro").getInput());
+        form.appendChild(new Input("lastName", "Apellido", "text", "Navarro").getInput());
+        form.appendChild(new Input("ced", "Cedula", "text", "30.292.216").getInput());
+        form.appendChild(new Input("tlf", "Telefono", "tel", "XXX-8968401").getInput());
+        form.appendChild(new Input("address", "Direccion", "text", "example@email.com").getInput());
         form.appendChild(new Button("buton", "Siguiente").getButton());
 
-        formMini.appendChild(new Input("miniName", "Nombre", "text", "[A-Za-zñÑ]+").getInput());
-        formMini.appendChild(new Input("miniLastName", "Apellido", "text", "[A-Za-zñÑ]+").getInput());
-        formMini.appendChild(new Input("miniCed", "Cedula", "text", "[A-Za-zñÑ]+").getInput());
-        formMini.appendChild(new Input("miniTlf", "Telefono", "tel", "[A-Za-zñÑ]+").getInput());
-        formMini.appendChild(new Input("miniAddress", "Direccion", "text", "[A-Za-zñÑ]+").getInput());
+        formMini.appendChild(new Input("miniName", "Nombre", "text", "Isidoro").getInput());
+        formMini.appendChild(new Input("miniLastName", "Apellido", "text", "Navarro").getInput());
+        formMini.appendChild(new Input("miniCed", "Cedula", "text", "30.292.216").getInput());
+        formMini.appendChild(new Input("miniTlf", "Telefono", "tel", "XXX-8968401").getInput());
+        formMini.appendChild(new Input("miniAddress", "Direccion", "text", "example@email.com").getInput());
         formMini.appendChild(new Button("miniButon", "Siguiente").getButton());
         
         container.appendChild(form)
