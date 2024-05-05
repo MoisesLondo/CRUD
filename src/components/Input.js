@@ -13,7 +13,7 @@ export default class Input
             id=${id} type=${type}"/>
 
             <span class="
-            tracking-wider absolute left-0 top-3 px-3 text-md 
+            tracking-wider absolute left-0 top-3 px-3 text-m
             peer-focus:text-rose-400 pointer-events-none duration-100 
             peer-focus:text-sm peer-focus:-translate-y-5 bg-white ml-2
             peer-valid:text-sm peer-valid:-translate-y-5

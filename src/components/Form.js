@@ -19,14 +19,14 @@ class Form
         form.appendChild(new Input("lastName", "Apellido", "text", "Navarro").getInput());
         form.appendChild(new Input("ced", "Cedula", "text", "30.292.216").getInput());
         form.appendChild(new Input("tlf", "Telefono", "tel", "XXX-8968401").getInput());
-        form.appendChild(new Input("address", "Direccion", "text", "example@email.com").getInput());
+        form.appendChild(new Input("address", "Correo", "text", "ex-ple@email.com").getInput());
         form.appendChild(new Button("buton", "Siguiente").getButton());
 
         formMini.appendChild(new Input("miniName", "Nombre", "text", "Isidoro").getInput());
         formMini.appendChild(new Input("miniLastName", "Apellido", "text", "Navarro").getInput());
         formMini.appendChild(new Input("miniCed", "Cedula", "text", "30.292.216").getInput());
         formMini.appendChild(new Input("miniTlf", "Telefono", "tel", "XXX-8968401").getInput());
-        formMini.appendChild(new Input("miniAddress", "Direccion", "text", "example@email.com").getInput());
+        formMini.appendChild(new Input("miniAddress", "Correo", "text", "ex-ple@email.com").getInput());
         formMini.appendChild(new Button("miniButon", "Siguiente").getButton());
         
         container.appendChild(form)
