@@ -10,8 +10,7 @@ class Navbar
                 <h1 class='text-3xl'>Lista de Vehiculos</h1>
                 <h1 class='text-sm -mt-2 text-color-txt'>Formulario</h1>
             </div>
-            <a href="./crud.html">Crud</a>
-        `
+        `;
         document.body.appendChild(navbar).firstChild;
     }
 }

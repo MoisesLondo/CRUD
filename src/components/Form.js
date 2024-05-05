@@ -65,6 +65,5 @@ boton.addEventListener("click", (e) =>{
     e.preventDefault();
     form.extractionsDatos()
     alert("Los datos del comprador se han guardado.");
-    window.location.href = "home.html"
 })
 
