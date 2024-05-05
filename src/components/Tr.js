@@ -10,11 +10,11 @@ export default class Tr
         this.tr.className = id%2 ? "bg-white" : "bg-gray-50";
         this.tr.innerHTML = 
         `
-            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">${name}</td>    
-            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">${lastName}</td>
-            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">${idn}</td>
-            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">${tlf}</td>
-            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">${address}</td>
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">${name}</td>    
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">${lastName}</td>
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">${idn}</td>
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">${tlf}</td>
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">${address}</td>
         `;
         this.miniTr.innerHTML = 
         `

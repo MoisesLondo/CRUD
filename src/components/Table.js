@@ -6,18 +6,18 @@ class Table
     containerMain = document.createElement('div');
     constructor()
     {
-        this.containerMain.className = "w-auto flex flex-col items-center p-1";
+        this.containerMain.className = "w-4/6 flex flex-col items-center";
         this.container.className = "w-11/12 rounded-lg shadow hidden md:block";
         this.containerMiniTr.className = "w-11/12 grid grid-cols-1 gap-4 md:hidden";
-        this.table.className = "w-full table";
+        this.table.className = "w-full";
         this.table.innerHTML= 
         `
-            <thead class="bg-gray-50 border-b-2 border-gray-200 table-header-group">
-                <th class="p-3 text-sm font-semibold tracking-wide text-left">Nombre</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-left">Apellido</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-left">Cedula</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-left">Telefono</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-left">Direccion</th>
+            <thead class="w-full bg-gray-50 border-b-2 border-gray-200 ">
+                <th class="p-3 text-sm font-semibold tracking-wide text-center">Nombre</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-center">Apellido</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-center">Cedula</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-center">Telefono</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-center">Direccion</th>
             </thead>
             <tbody class="divide-y divide-gray-100"></tbody>
         `;
