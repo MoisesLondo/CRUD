@@ -43,11 +43,5 @@ const idn = localStorage.getItem("idn")
 const tlf = localStorage.getItem("tlf")
 const address = localStorage.getItem("address")
 
-const tr = new Tr(list.getId(), name, lastname, idn, tlf, address)
-list.Add(tr)
-list.getList().forEach(item => 
-    {
-        table.Add(item.getTr(), item.getMiniTr());
-    })
 
 
