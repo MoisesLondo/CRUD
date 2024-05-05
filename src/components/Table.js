@@ -7,13 +7,13 @@ class Table
     containerMain = document.createElement('div');
     constructor()
     {
-        this.containerMain.className = "flex flex-col items-center";
+        this.containerMain.className = "w-auto flex flex-col items-center p-1";
         this.container.className = "w-11/12 rounded-lg shadow hidden md:block";
         this.containerMiniTr.className = "w-11/12 grid grid-cols-1 gap-4 md:hidden";
-        this.table.className = "w-full";
+        this.table.className = "w-full table";
         this.table.innerHTML= 
         `
-            <thead class="bg-gray-50 border-b-2 border-gray-200">
+            <thead class="bg-gray-50 border-b-2 border-gray-200 table-header-group">
                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Nombre</th>
                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Apellido</th>
                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Cedula</th>
@@ -24,8 +24,8 @@ class Table
         `;
         this.container.appendChild(this.table);
         this.containerMain.appendChild(this.container);
-        this.containerMain.appendChild(this.containerMiniTr);
-        document.body.appendChild(this.containerMain);
+        document.getElementById("container-main").appendChild(this.containerMiniTr);
+        document.getElementById("container-wrapped").appendChild(this.containerMain);
     }
 
     Add(obj, obj1)
@@ -36,11 +36,6 @@ class Table
 }
 
 const table = new Table()
-const name = localStorage.getItem("name")
-const lastname = localStorage.getItem("lastname")
-const idn = localStorage.getItem("idn")
-const tlf = localStorage.getItem("tlf")
-const address = localStorage.getItem("address")
 
-
-
+const tr = new Tr(1, "Isidoro", "Navarro", "21.383.923", "0412-2903142", "Malibu");
+table.Add(tr.getTr(), tr.getMiniTr());
