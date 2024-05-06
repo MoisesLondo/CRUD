@@ -10,7 +10,7 @@ class Form
         const formMini = document.createElement('div');
         const container = document.createElement('div');
         const containerMain = document.createElement('div');
-        containerMain.className = "w-1/3 flex flex-col items-center";
+        containerMain.className = "w-1/4 flex flex-col items-center";
         container.className = 'w-full p-4 rounded-xl shadow hidden md:block';
         formMini.className = 'w-10/12 flex flex-col gap-6 p-4 rounded-xl shadow md:hidden';
         form.className = "flex flex-col gap-3";
