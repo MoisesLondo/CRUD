@@ -55,9 +55,31 @@ class Form
         
         return {name, lastname, idn, tlf, address};
     }
+
+    changeInputs()
+    {
+        const form = document.querySelector('.flex.flex-col.gap-3');
+
+    form.querySelectorAll('input').forEach(inputElement => {
+        const labelElement = inputElement.nextElementSibling;
+        inputElement.remove();
+        labelElement.remove();
+        
+    });
+    const boton = document.getElementById("buton");
+    boton.remove();
+
+    form.appendChild(new Input("idCar", "Placa", "text", "AB123CD").getInput());
+    form.appendChild(new Input("year", "Año del vehículo", "text", "2015").getInput());
+    form.appendChild(new Input("color", "Color", "text", "Rojo").getInput());
+    form.appendChild(new Button("finish", "Registrar").getButton());
 }
+        
+    }
+
 const form = new Form();
 const boton = document.getElementById("buton");
+const finish = document.getElementById("finish");
 const miniBoton = document.getElementById("miniButon");
 let i = 1;
 const trNew = new Tr(i, "Freddy", "Trucazo", "12.343.532", "245-2032121", "Los Santos");
@@ -69,6 +91,7 @@ boton.addEventListener("click", (e) =>{
     const trNew = new Tr(i, name, lastname, idn, tlf, address);
     i++;
     table.Add(trNew.getTr(), trNew.getMiniTr());
+    form.changeInputs();
 })
 
 miniBoton.addEventListener("click", (e) =>{
@@ -77,4 +100,9 @@ miniBoton.addEventListener("click", (e) =>{
     const trNew = new Tr(i, name, lastname, idn, tlf, address);
     i++;
     table.Add(trNew.getTr(), trNew.getMiniTr());
+    form.changeInputs();
+})
+
+finish.addEventListener("click", (e) =>{
+    e.preventDefault();
 })
