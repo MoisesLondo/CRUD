@@ -16,8 +16,8 @@ class Table
                 <th class="p-3 text-sm font-semibold tracking-wide text-center">Nombre</th>
                 <th class="p-3 text-sm font-semibold tracking-wide text-center">Apellido</th>
                 <th class="p-3 text-sm font-semibold tracking-wide text-center">Cedula</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-center">Telefono</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-center">Direccion</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-center">Placa</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-center">Color</th>
             </thead>
             <tbody class="divide-y divide-gray-100"></tbody>
         `;
