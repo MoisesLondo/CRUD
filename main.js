@@ -26,7 +26,8 @@ function miniExtractionsDatos()
 const boton = document.getElementById("buton");
 const finish = document.getElementById("finish");
 const miniBoton = document.getElementById("miniButon");
-const back = document.getElementById("back")
+const back = document.getElementById("back");
+const miniBack = document.getElementById("miniBack");
 let i = 1;
 const trNew = new Tr(i, "Freddy", "Trucazo", "12.343.532", "245-2032121", "Los Santos");
 table.Add(trNew.getTr(), trNew.getMiniTr());
@@ -81,3 +82,12 @@ back.addEventListener("click", (e) =>{
     form.getContainerMain().classList.remove('hidden');
     form.getFormMini().classList.remove('hidden');
 })
+
+miniBack.addEventListener('click', (e) =>
+{
+    form2.getContainerMain().classList.add('hidden');
+    form2.getFormMini().classList.add('hidden');
+
+    form.getContainerMain().classList.remove('hidden');
+    form.getFormMini().classList.remove('hidden');        
+});
