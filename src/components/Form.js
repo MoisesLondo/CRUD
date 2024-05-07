@@ -53,8 +53,14 @@ class Form
     }
 }
 const inputName = new Input("name", "Nombre", "text", "Isidoro");
+inputName.container.addEventListener("input", validateInput);
+
 const inputLastName = new Input("lastName", "Apellido", "text", "Navarro");
+inputLastName.container.addEventListener("input", validateInput);
+
 const inputIDN = new Input("ced", "Cedula", "text", "30.292.216");
+inputIDN.container.addEventListener("input", validateInputDNI);
+
 const inputTLF = new Input("tlf", "Telefono", "tel", "XXX-8968401");
 const inputAddress = new Input("address", "Correo", "text", "ex-ple@email.com");
 const button = new Button("buton", "Siguiente");
@@ -72,7 +78,11 @@ export const form = new Form([inputName, inputLastName, inputIDN, inputTLF, inpu
 
 const inputCar = new Input("idCar", "Placa", "text", "AB123CD");
 const inputYearCar = new Input("year", "Año del vehículo", "text", "2015");
+inputYearCar.container.addEventListener("input", validateInputYear);
+
 const inputColor = new Input("color", "Color", "text", "Rojo");
+inputColor.container.addEventListener("input", validateInput);
+
 const buttonCar = new Button("finish", "Registrar");
 
 const inputCarMini = new Input("miniIdCar", "Placa", "text", "AB123CD");
@@ -83,3 +93,28 @@ const buttonCarMini = new Button("miniFinish", "Registrar");
 export const form2 = new Form([inputCar, inputYearCar, inputColor],[inputCarMini, inputYearCarMini, inputColorMini],[buttonCar, back],[buttonCarMini, miniBack]);
 form2.getContainerMain().classList.add('hidden');
 form2.getFormMini().classList.add('hidden');
+
+function validateInput(e) {
+    const input = e.target;
+    const inputValue = input.value.trim();
+    const hasNumbers = /[0-9]/.test(inputValue);
+    input.value = hasNumbers ? inputValue.replace(/[0-9]/g, "") : inputValue;
+  }
+  function validateInputDNI(e) {
+    const input = e.target;
+    const inputValue = input.value.trim();
+    const validLengthRegex = /^(\d{6}|\d{7}|\d{8})$/;
+    const isValidLength = validLengthRegex.test(inputValue);
+    input.value = isValidLength ? inputValue : inputValue.replace(/[^0-9]/g, "");
+  
+  }
+  function validateInputYear(e) {
+    const input = e.target;
+    const inputValue = input.value.trim();
+    const validLengthRegex = /^\d{4}$/;
+    const validRange = inputValue >= 1970 && inputValue <= 2024;
+    const isValidLength = validLengthRegex.test(inputValue) && validRange;
+    input.value = isValidLength ? inputValue : inputValue.replace(/[^0-9]/g, "");
+  
+  }
+  
