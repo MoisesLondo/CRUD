@@ -1,6 +1,4 @@
 import Tr from "./src/components/Tr.js";
-import Input from "./src/components/Input.js";
-import Button from "./src/components/Button.js";
 import { form, form2 } from "./src/components/Form.js";
 
 function extractionsDatos()
