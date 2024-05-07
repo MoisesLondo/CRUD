@@ -58,6 +58,7 @@ const inputIDN = new Input("ced", "Cedula", "text", "30.292.216");
 const inputTLF = new Input("tlf", "Telefono", "tel", "XXX-8968401");
 const inputAddress = new Input("address", "Correo", "text", "ex-ple@email.com");
 const button = new Button("buton", "Siguiente");
+const back = new Button("back", "Atrás");
 
 const inputNameMini = new Input("miniName", "Nombre", "text", "Isidoro");
 const inputLastNameMini = new Input("miniLastName", "Apellido", "text", "Navarro");
@@ -65,6 +66,7 @@ const inputIDNMini = new Input("miniCed", "Cedula", "text", "30.292.216");
 const inputTLFMini = new Input("miniTlf", "Telefono", "tel", "XXX-8968401");
 const inputAddressMini = new Input("miniAddress", "Correo", "text", "ex-ple@email.com");
 const buttonMini = new Button("miniButon", "Siguiente");
+const miniBack = new Button("miniBack", "Atrás")
 
 export const form = new Form([inputName, inputLastName, inputIDN, inputTLF, inputAddress],[inputNameMini, inputLastNameMini, inputIDNMini, inputTLFMini, inputAddressMini],[button],[buttonMini]);
 
@@ -78,6 +80,6 @@ const inputYearCarMini = new Input("miniYear", "Año del vehículo", "text", "20
 const inputColorMini = new Input("miniColor", "Color", "text", "Rojo");
 const buttonCarMini = new Button("miniFinish", "Registrar");
 
-export const form2 = new Form([inputCar, inputYearCar, inputColor],[inputCarMini, inputYearCarMini, inputColorMini],[buttonCar],[buttonCarMini]);
+export const form2 = new Form([inputCar, inputYearCar, inputColor],[inputCarMini, inputYearCarMini, inputColorMini],[buttonCar, back],[buttonCarMini, miniBack]);
 form2.getContainerMain().classList.add('hidden');
 form2.getFormMini().classList.add('hidden');
