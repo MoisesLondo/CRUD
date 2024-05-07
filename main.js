@@ -28,6 +28,7 @@ const finish = document.getElementById("finish");
 const miniBoton = document.getElementById("miniButon");
 const back = document.getElementById("back");
 const miniBack = document.getElementById("miniBack");
+const inputColor = document.getElementById('color');
 let i = 1;
 const trNew = new Tr(i, "Freddy", "Trucazo", "12.343.532", "245-2032121", "Los Santos");
 table.Add(trNew.getTr(), trNew.getMiniTr());
@@ -90,4 +91,11 @@ miniBack.addEventListener('click', (e) =>
 
     form.getContainerMain().classList.remove('hidden');
     form.getFormMini().classList.remove('hidden');        
+});
+
+inputColor.addEventListener('change', ()=>
+{
+    const span = document.getElementById("spanColor");
+    span.innerHTML = inputColor.value;
+    console.log(inputColor.value);
 });

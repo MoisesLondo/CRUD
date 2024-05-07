@@ -1,6 +1,7 @@
 import Input from "./Input.js";
 import Button from "./Button.js";
 import Select from "./Select.js";
+import Color from "./Color.js";
 
 class Form 
 {
@@ -78,12 +79,11 @@ export const form = new Form([inputName, inputLastName, inputIDN, inputTLF, inpu
 
 const inputCar = new Input("idCar", "Placa", "text", "AB123CD");
 const inputYearCar = new Input("year", "Año del vehículo", "text", "2015");
-
 inputYearCar.container.addEventListener("input", validateInputYear);
-const inputColor = new Input("color", "Color", "text", "Rojo");
 
+const inputColor = new Color("color", "spanColor");
 const selectMarca = new Select("selectBrand", "marca", "Marca", "la Marca", ["Toyota","Nissan","Mazda","Lexus","Subaru"]);
-inputColor.container.addEventListener("input", validateInput);
+
 const buttonCar = new Button("finish", "Registrar");
 const back = new Button("back", "Atrás");
 
@@ -102,16 +102,16 @@ function validateInput(e) {
     const inputValue = input.value.trim();
     const hasNumbers = /[0-9]/.test(inputValue);
     input.value = hasNumbers ? inputValue.replace(/[0-9]/g, "") : inputValue;
-  }
-  function validateInputDNI(e) {
+}
+function validateInputDNI(e) {
     const input = e.target;
     const inputValue = input.value.trim();
     const validLengthRegex = /^(\d{6}|\d{7}|\d{8})$/;
     const isValidLength = validLengthRegex.test(inputValue);
     input.value = isValidLength ? inputValue : inputValue.replace(/[^0-9]/g, "");
   
-  }
-  function validateInputYear(e) {
+}
+function validateInputYear(e) {
     const input = e.target;
     const inputValue = input.value.trim();
     const validLengthRegex = /^\d{4}$/;
@@ -119,5 +119,5 @@ function validateInput(e) {
     const isValidLength = validLengthRegex.test(inputValue) && validRange;
     input.value = isValidLength ? inputValue : inputValue.replace(/[^0-9]/g, "");
   
-  }
-  
+}
+
