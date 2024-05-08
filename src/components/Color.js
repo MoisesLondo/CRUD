@@ -22,7 +22,10 @@ export default class Color
         containerColor.appendChild(this.span);
         this.containerMain.appendChild(containerColor);
     }
-
+    AddEvent(event)
+    {
+        this.inputColor.addEventListener('change', event)
+    }
     getInput()
     {
         return this.containerMain;

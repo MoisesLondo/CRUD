@@ -82,20 +82,59 @@ const inputYearCar = new Input("year", "Año del vehículo", "text", "2015");
 inputYearCar.container.addEventListener("input", validateInputYear);
 
 const inputColor = new Color("color", "spanColor");
-const selectMarca = new Select("selectBrand", "marca", "Marca", "la Marca", ["Toyota","Nissan","Mazda","Lexus","Subaru"]);
 
-const buttonCar = new Button("finish", "Registrar");
+const selectMarca = new Select("selectBrand", "marca", "Marca", "la Marca");
+const selectModelo = new Select("selectModel", "modelo", "Modelo", "el Modelo");
+selectMarca.AddOptions(["Toyota","Nissan","Mazda","Mitsubishi","Subaru"]);
+selectMarca.AddEvent(()=>
+    {
+        const Select = selectMarca.getSelect();
+        const list = 
+            (Select.value == "toyota") ? ["Supra", "Corolla", "Starlet"] : 
+            (Select.value == "nissan") ? ["GT-R", "370z", "Skyline"]: 
+            (Select.value == "mazda") ? ["MX-5 Miata", "RX-8", "MX-6"] :
+            (Select.value == "lexus") ? ["Lancer Evolution IX", "Galant VR-4", "Eclipse"] :
+            (Select.value == "subaru") ? ["BRZ", "WRX STI", "Legacy"]: [""]; 
+        selectModelo.AddOptions(list); 
+    })
+
+const register = new Button("finish", "Registrar");
 const back = new Button("back", "Atrás");
 
 const inputCarMini = new Input("miniIdCar", "Placa", "text", "AB123CD");
 const inputYearCarMini = new Input("miniYear", "Año del vehículo", "text", "2015");
-const inputColorMini = new Input("miniColor", "Color", "text", "Rojo");
-const buttonCarMini = new Button("miniFinish", "Registrar");
+
+const selectMarcaMini = new Select("miniSelectBrand", "marca", "Marca", "la Marca");
+selectMarcaMini.AddOptions(["Toyota","Nissan","Mazda","Mitsubishi","Subaru"]);
+const selectModeloMini = new Select("miniSelectModel", "modelo", "Modelo", "el Modelo");
+selectMarcaMini.AddEvent(()=>
+    {
+        const Select = selectMarcaMini.getSelect();
+        const list = 
+            (Select.value == "toyota") ? ["Supra", "Corolla", "Starlet"] : 
+            (Select.value == "nissan") ? ["GT-R", "370z", "Skyline"]: 
+            (Select.value == "mazda") ? ["MX-5 Miata", "RX-8", "MX-6"] :
+            (Select.value == "lexus") ? ["Lancer Evolution IX", "Galant VR-4", "Eclipse"] :
+            (Select.value == "subaru") ? ["BRZ", "WRX STI", "Legacy"]: [""]; 
+        selectModeloMini.AddOptions(list); 
+    })
+
+const inputColorMini = new Color("minicolor", "miniSpanColor");
+const registerMini = new Button("miniFinish", "Registrar");
 const miniBack = new Button("miniBack", "Atrás");
 
-export const form2 = new Form([inputCar, inputYearCar, inputColor, selectMarca],[inputCarMini, inputYearCarMini, inputColorMini],[back, buttonCar],[miniBack, buttonCarMini]);
+export const form2 = new Form([inputCar, inputYearCar, inputColor, selectMarca, selectModelo],[inputCarMini, inputYearCarMini, selectMarcaMini, selectModeloMini, inputColorMini],[back, register],[miniBack, registerMini]);
 form2.getContainerMain().classList.add('hidden');
 form2.getFormMini().classList.add('hidden');
+
+
+button.AddEvent(PaginationForm);
+buttonMini.AddEvent(PaginationForm);
+back.AddEvent(PaginationFormBack);
+miniBack.AddEvent(PaginationFormBack);
+inputColor.AddEvent(ChangeColor);
+register.AddEvent(Register);
+registerMini.AddEvent(Register);
 
 function validateInput(e) {
     const input = e.target;
@@ -120,4 +159,42 @@ function validateInputYear(e) {
     input.value = isValidLength ? inputValue : inputValue.replace(/[^0-9]/g, "");
   
 }
+function PaginationForm()
+{
+    form.getContainerMain().classList.add('hidden');
+    form.getFormMini().classList.add('hidden');
+    
+    form2.getContainerMain().classList.remove('hidden');
+    form2.getFormMini().classList.remove('hidden');
+}
+function PaginationFormBack()
+{
+    form2.getContainerMain().classList.add('hidden');
+    form2.getFormMini().classList.add('hidden');
 
+    form.getContainerMain().classList.remove('hidden');
+    form.getFormMini().classList.remove('hidden');
+}
+function ChangeColor()
+{
+    const span = document.getElementById("spanColor");
+    span.innerHTML = inputColor.value;
+    console.log(inputColor.value);
+}
+function Register()
+{
+    form2.getContainerMain().classList.add('hidden');
+    form2.getFormMini().classList.add('hidden');
+
+    form.getContainerMain().classList.remove('hidden');
+    form.getFormMini().classList.remove('hidden');
+    
+    document.getElementById("name").value = "";
+    document.getElementById("lastName").value = "";
+    document.getElementById("ced").value = "";
+    document.getElementById("tlf").value = "";
+    document.getElementById("address").value = "";
+    document.getElementById("idCar").value = "";
+    document.getElementById("year").value = "";
+    document.getElementById("color").value = "";
+}
