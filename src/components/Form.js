@@ -62,7 +62,7 @@ const inputLastName = new Input("lastName", "Apellido", "text", "Navarro");
 inputLastName.container.addEventListener("input", validateInput);
 
 const inputIDN = new Input("ced", "Cedula", "text", "30.292.216");
-inputIDN.container.addEventListener("input", validateInputDNI);
+inputIDN.container.addEventListener("input", validateInputNumbers);
 
 const inputTLF = new Input("tlf", "Telefono", "tel", "XXX-8968401");
 const inputAddress = new Input("address", "Correo", "text", "ex-ple@email.com");
@@ -79,7 +79,7 @@ export const form = new Form([inputName, inputLastName, inputIDN, inputTLF, inpu
 
 const inputCar = new Input("idCar", "Placa", "text", "AB123CD");
 const inputYearCar = new Input("year", "Año del vehículo", "text", "2015");
-inputYearCar.container.addEventListener("input", validateInputYear);
+inputYearCar.container.addEventListener("input", validateInputNumbers);
 
 const inputColor = new Color("color", "spanColor");
 
@@ -127,22 +127,67 @@ export const form2 = new Form([inputCar, inputYearCar, inputColor, selectMarca, 
 form2.getContainerMain().classList.add('hidden');
 form2.getFormMini().classList.add('hidden');
 
-
+button.AddEvent((e) => validationFormPerson() ? PaginationForm() : e.stopImmediatePropagation());
+buttonMini.AddEvent((e) => validationFormPerson() ? PaginationForm() : e.stopImmediatePropagation());
 button.AddEvent(PaginationForm);
 buttonMini.AddEvent(PaginationForm);
 back.AddEvent(PaginationFormBack);
 miniBack.AddEvent(PaginationFormBack);
 inputColor.AddEvent(ChangeColor);
+register.AddEvent((e) => validationFormCar() ? Register : e.stopImmediatePropagation())
+registerMini.AddEvent((e) => validationFormCar() ? Register : e.stopImmediatePropagation())
 register.AddEvent(Register);
 registerMini.AddEvent(Register);
 
+
+function validationFormPerson(){
+    const name = document.getElementById("name").value
+    const lastName = document.getElementById("lastName").value
+    const idn = document.getElementById("ced").value
+    const tlf = document.getElementById("tlf").value
+    const address = document.getElementById("address").value
+    const expresion = /^\S+@\S+\.\S+$/
+    const phoneRegex = /^(0412|0414|0424|0426)-\d{7}$/;
+
+
+    const isIdnValid = (idn.length >= 6 && idn.length <= 8) ? true : false;
+    const isFormValid = (name === "" || lastName === "" || idn === "" || tlf === "" || address === "") ? false : true;
+    const isEmailValid = (expresion.test(address))
+    const isTlfValid = (phoneRegex.test(tlf))
+
+    return (!isFormValid) ? (alert("Todos los campos son obligatorios."), false) :
+           (!isIdnValid) ? (alert("La cédula debe tener entre 6 y 8 caracteres."), false) :
+           (!isEmailValid) ? (alert("El correo es invalido."), false) :
+           (!isTlfValid) ? (alert("El número de teléfono no es valido"), false) : 
+           true;
+}
+
+function validationFormCar(){
+    const placa = document.getElementById("idCar").value
+    const year = document.getElementById("year").value
+    const color = document.getElementById("color").value
+    const marca = document.getElementById("selectBrand").value
+    const modelo = document.getElementById("selectModel").value
+
+    const isFormValid = (placa === "" || year === "" || color === "" || marca === "" || modelo === "") ? false : true;
+    const isYearValid = (year.length >= 4 && year.length <= 4) ? true : false;
+    const isIdCarValid = (placa.length >= 6 && placa.length <= 7) ? true : false;
+    const yearNumber = parseInt(year, 10);
+    const isYearValid2 = (yearNumber >= 1960 && yearNumber <= 2024);
+
+    return(!isFormValid) ? (alert("Todos los campos son obligatorios."), false) :
+    (!isYearValid) ? (alert("Ingrese el año del vehículo en formato AAAA."), false) :
+    (!isYearValid2) ? (alert("Año invalido"), false) :
+    (!isIdCarValid) ? (alert("Placa invalida"), false) :
+    true;
+}
 function validateInput(e) {
     const input = e.target;
     const inputValue = input.value.trim();
     const hasNumbers = /[0-9]/.test(inputValue);
     input.value = hasNumbers ? inputValue.replace(/[0-9]/g, "") : inputValue;
 }
-function validateInputDNI(e) {
+function validateInputNumbers(e) {
     const input = e.target;
     const inputValue = input.value.trim();
     const validLengthRegex = /^(\d{6}|\d{7}|\d{8})$/;
@@ -150,17 +195,9 @@ function validateInputDNI(e) {
     input.value = isValidLength ? inputValue : inputValue.replace(/[^0-9]/g, "");
   
 }
-function validateInputYear(e) {
-    const input = e.target;
-    const inputValue = input.value.trim();
-    const validLengthRegex = /^\d{4}$/;
-    const validRange = inputValue >= 1970 && inputValue <= 2024;
-    const isValidLength = validLengthRegex.test(inputValue) && validRange;
-    input.value = isValidLength ? inputValue : inputValue.replace(/[^0-9]/g, "");
-  
-}
 function PaginationForm()
 {
+
     form.getContainerMain().classList.add('hidden');
     form.getFormMini().classList.add('hidden');
     
