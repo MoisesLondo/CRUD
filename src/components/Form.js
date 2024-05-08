@@ -2,6 +2,9 @@ import Input from "./Input.js";
 import Button from "./Button.js";
 import Select from "./Select.js";
 import Color from "./Color.js";
+import People from "../objects/Persona.js";
+import Vehicle from "../objects/Vehiculo.js";
+import Tr from "./Tr.js";
 
 class Form 
 {
@@ -81,7 +84,7 @@ const inputCar = new Input("idCar", "Placa", "text", "AB123CD");
 const inputYearCar = new Input("year", "Año del vehículo", "text", "2015");
 inputYearCar.container.addEventListener("input", validateInputNumbers);
 
-const inputColor = new Color("color", "spanColor");
+const inputColor = new Color("inputColor", "spanColor");
 
 const selectMarca = new Select("selectBrand", "marca", "Marca", "la Marca");
 const selectModelo = new Select("selectModel", "modelo", "Modelo", "el Modelo");
@@ -97,7 +100,7 @@ selectMarca.AddEvent(()=>
             (Select.value == "subaru") ? ["BRZ", "WRX STI", "Legacy"]: [""]; 
         selectModelo.AddOptions(list); 
     })
-
+const url = new Input("url", "Imagen", "url", "https://....com");
 const register = new Button("finish", "Registrar");
 const back = new Button("back", "Atrás");
 
@@ -119,11 +122,12 @@ selectMarcaMini.AddEvent(()=>
         selectModeloMini.AddOptions(list); 
     })
 
-const inputColorMini = new Color("minicolor", "miniSpanColor");
+const inputColorMini = new Color("miniColor", "miniSpanColor");
+const miniUrl = new Input("url", "Imagen", "url", "https://....com");
 const registerMini = new Button("miniFinish", "Registrar");
 const miniBack = new Button("miniBack", "Atrás");
 
-export const form2 = new Form([inputCar, inputYearCar, inputColor, selectMarca, selectModelo],[inputCarMini, inputYearCarMini, selectMarcaMini, selectModeloMini, inputColorMini],[back, register],[miniBack, registerMini]);
+export const form2 = new Form([inputCar, inputYearCar, inputColor, selectMarca, selectModelo, url],[inputCarMini, inputYearCarMini, inputColorMini, selectMarcaMini, selectModeloMini, miniUrl],[back, register],[miniBack, registerMini]);
 form2.getContainerMain().classList.add('hidden');
 form2.getFormMini().classList.add('hidden');
 
@@ -165,7 +169,7 @@ function validationFormPerson(){
 function validationFormCar(){
     const placa = document.getElementById("idCar").value
     const year = document.getElementById("year").value
-    const color = document.getElementById("color").value
+    const color = document.getElementById("inputColor").value
     const marca = document.getElementById("selectBrand").value
     const modelo = document.getElementById("selectModel").value
 
@@ -215,8 +219,9 @@ function PaginationFormBack()
 function ChangeColor()
 {
     const span = document.getElementById("spanColor");
-    span.innerHTML = inputColor.value;
-    console.log(inputColor.value);
+    span.innerHTML = inputColor.getInputColor().value;
+    span.value = inputColor.getInputColor().value;
+    console.log(span.value);
 }
 function Register()
 {
@@ -225,6 +230,15 @@ function Register()
 
     form.getContainerMain().classList.remove('hidden');
     form.getFormMini().classList.remove('hidden');
+
+    const { name, lastname, idn, tlf, address } = extractionsDatosPeople();
+    const Persona = new People(name, lastname, idn, tlf, address);
+    const { car, year, brand, modelo, color, url } = extractionsDatosCar();
+    const Vehiculo = new Vehicle( brand, modelo, color, car, year, url)
+    console.log(color);
+    Vehiculo.asigOwn(Persona);
+    const tr = new Tr(1, Vehiculo);
+    table.Add(tr.getTr(), tr.getMiniTr());
     
     document.getElementById("name").value = "";
     document.getElementById("lastName").value = "";
@@ -233,5 +247,28 @@ function Register()
     document.getElementById("address").value = "";
     document.getElementById("idCar").value = "";
     document.getElementById("year").value = "";
-    document.getElementById("color").value = "";
+
+}
+
+function extractionsDatosPeople()
+{   
+    const name = document.getElementById("name").value;
+    const lastname = document.getElementById("lastName").value;
+    const idn = document.getElementById("ced").value;
+    const tlf = document.getElementById("tlf").value;
+    const address = document.getElementById("address").value;
+    
+    return {name, lastname, idn, tlf, address};
+}
+
+function extractionsDatosCar()
+{   
+    const car = document.getElementById("idCar").value;
+    const year = document.getElementById("year").value;
+    const brand = document.getElementById("selectBrand").value;
+    const modelo = document.getElementById("selectModel").value;
+    const color = document.getElementById("spanColor").value;
+    const url = document.getElementById("url").value;
+    
+    return {car, year, brand, modelo, color, url};
 }

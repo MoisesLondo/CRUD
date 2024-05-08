@@ -1,4 +1,9 @@
-#color::-webkit-color-swatch
+#inputColor::-webkit-color-swatch
+{
+    border-radius: 50px;
+    border: none;
+}
+#miniColor::-webkit-color-swatch
 {
     border-radius: 50px;
     border: none;

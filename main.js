@@ -20,7 +20,3 @@ function miniExtractionsDatos()
     
     return {name, lastname, idn, tlf, address};
 }
-
-let i = 1;
-const trNew = new Tr(i, "Freddy", "Trucazo", "12.343.532", "245-2032121", "Los Santos");
-table.Add(trNew.getTr(), trNew.getMiniTr());
