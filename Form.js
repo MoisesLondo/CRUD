@@ -74,8 +74,14 @@ const inputAddress = new Input("address", "Correo", "text", "ex-ple@email.com");
 const button = new Button("buton", "Siguiente");
 
 const inputNameMini = new Input("miniName", "Nombre", "text", "Isidoro");
+inputNameMini.container.addEventListener("input", validateInput);
+
 const inputLastNameMini = new Input("miniLastName", "Apellido", "text", "Navarro");
+inputLastNameMini.container.addEventListener("input", validateInput);
+
 const inputIDNMini = new Input("miniCed", "Cedula", "text", "30.292.216");
+inputIDNMini.container.addEventListener("input", validateInputNumbers);
+
 const inputTLFMini = new Input("miniTlf", "Telefono", "tel", "XXX-8968401");
 const inputAddressMini = new Input("miniAddress", "Correo", "text", "ex-ple@email.com");
 const buttonMini = new Button("miniButon", "Siguiente");
@@ -110,6 +116,7 @@ const back = new Button("back", "Atrás");
 
 const inputCarMini = new Input("miniIdCar", "Placa", "text", "AB123CD");
 const inputYearCarMini = new Input("miniYear", "Año del vehículo", "text", "2015");
+inputYearCarMini.container.addEventListener("input", validateInputNumbers);
 
 const selectMarcaMini = new Select("miniSelectBrand", "marca", "Marca", "la Marca");
 selectMarcaMini.AddOptions(["Toyota","Nissan","Mazda","Mitsubishi","Subaru"]);
