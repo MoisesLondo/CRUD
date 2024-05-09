@@ -70,7 +70,7 @@ const inputIDN = new Input("ced", "Cedula", "text", "30.292.216");
 inputIDN.container.addEventListener("input", validateInputNumbers);
 
 const inputTLF = new Input("tlf", "Telefono", "tel", "XXX-8968401");
-const inputAddress = new Input("address", "Correo", "text", "ex-ple@email.com");
+const inputAddress = new Input("address", "Dirección", "text", "San Diego, Carabobo");
 const button = new Button("buton", "Siguiente");
 
 const inputNameMini = new Input("miniName", "Nombre", "text", "Isidoro");
@@ -171,7 +171,7 @@ function validationFormPerson(idName, idLastname, idCed, idTlf, idAddress){
 
     return (!isFormValid) ? (alert("Todos los campos son obligatorios."), false) :
            (!isIdnValid) ? (alert("La cédula debe tener entre 6 y 8 caracteres."), false) :
-           (!isEmailValid) ? (alert("El correo es invalido."), false) :
+        //    (!isEmailValid) ? (alert("El correo es invalido."), false) :
            (!isTlfValid) ? (alert("El número de teléfono no es valido."), false) : 
            true;
 }
