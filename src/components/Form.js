@@ -19,10 +19,10 @@ class Form
         const containerButton = document.createElement('div');
         const containerButtonMini = document.createElement('div');
         this.containerMain.className = "w-1/4 flex flex-col items-center";
-        container.className = 'w-full p-4 rounded-xl shadow hidden md:block';
+        container.className = 'w-full p-4 rounded-xl shadow hidden md:block shadow-2xl shadow-[#FFBFAF]';
         containerButton.className = 'w-full flex flex-row gap-3';
         containerButtonMini.className = 'w-full flex flex-row gap-3';
-        this.formMini.className = 'w-10/12 flex flex-col gap-6 p-4 rounded-xl shadow md:hidden';
+        this.formMini.className = 'w-10/12 flex flex-col gap-6 p-4 rounded-xl shadow-2xl shadow-[#FFBFAF] md:hidden';
         form.className = "flex flex-col gap-6";
         
         components.forEach((item)=>
