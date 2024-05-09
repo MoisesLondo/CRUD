@@ -18,8 +18,6 @@ class Form
         const container = document.createElement('div');
         const containerButton = document.createElement('div');
         const containerButtonMini = document.createElement('div');
-        const tituloContainer = document.createElement('span');
-        tituloContainer.className = "text-2xl text-[#EC5853] tracking-wider";
         this.containerMain.className = "w-1/4 flex flex-col items-center";
         container.className = 'w-full p-4 rounded-xl shadow hidden md:block';
         containerButton.className = 'w-full flex flex-row gap-3';
@@ -47,8 +45,6 @@ class Form
             containerButtonMini.appendChild(item.getButton());
         });
 
-        tituloContainer.innerHTML = titulo;
-        this.containerMain.appendChild(tituloContainer);
         container.appendChild(form);
         this.containerMain.appendChild(container);
         document.getElementById("container-wrapped").appendChild(this.containerMain);

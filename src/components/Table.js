@@ -7,9 +7,6 @@ class Table
     tbody = document.createElement('tbody');
     constructor()
     {
-        const titulo = document.createElement('span');
-        titulo.innerHTML = "Lista de Vehiculos";
-        titulo.className = "text-2xl text-[#EC5853] tracking-wider";
         this.containerMain.className = "w-4/6 flex flex-col items-center gap-5";
         this.container.className = "w-11/12 rounded-lg shadow-md hidden md:block bg-[#FF9E8F]";
         this.containerMiniTr.className = "w-11/12 grid grid-cols-1 gap-4 md:hidden";
@@ -24,11 +21,10 @@ class Table
                 <th class="p-3 text-sm font-semibold tracking-wide text-center text-white">Cedula</th>
                 <th class="p-3 text-sm font-semibold tracking-wide text-center text-white">Placa</th>
                 <th class="p-3 text-sm font-semibold tracking-wide text-center text-white">Color</th>
-                <th class="p-3 text-sm font-semibold tracking-wide text-center text-white">Acciones</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-center text-white"></th>
             </thead>
         `;
         this.table.appendChild(this.tbody);
-        this.containerMain.appendChild(titulo);
         this.container.appendChild(this.table);
         this.containerMain.appendChild(this.container);
         document.getElementById("container-main").appendChild(this.containerMiniTr);
