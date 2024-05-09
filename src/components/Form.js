@@ -163,7 +163,7 @@ function validationFormPerson(){
     return (!isFormValid) ? (alert("Todos los campos son obligatorios."), false) :
            (!isIdnValid) ? (alert("La cédula debe tener entre 6 y 8 caracteres."), false) :
            (!isEmailValid) ? (alert("El correo es invalido."), false) :
-           (!isTlfValid) ? (alert("El número de teléfono no es valido"), false) : 
+           (!isTlfValid) ? (alert("El número de teléfono no es valido."), false) : 
            true;
 }
 
@@ -186,10 +186,10 @@ function validationFormCar(){
 
     return(!isFormValid) ? (alert("Todos los campos son obligatorios."), false) :
     (!isYearValid) ? (alert("Ingrese el año del vehículo en formato AAAA."), false) :
-    (!isYearValid2) ? (alert("Año invalido"), false) :
-    (!isIdCarValid) ? (alert("Placa invalida"), false) :
-    (!isUrlValid) ? (alert("La URL no es valida")) :
-    true;
+    (!isYearValid2) ? (alert("Año invalido."), false) :
+    (!isIdCarValid) ? (alert("Placa invalida."), false) :
+    (!isUrlValid) ? (alert("La URL no es valida.")) :
+    (alert("Registrado correctamente.")), true;
 }
 function validateInput(e) {
     const input = e.target;
@@ -254,8 +254,10 @@ function Register()
     document.getElementById("address").value = "";
     document.getElementById("idCar").value = "";
     document.getElementById("year").value = "";
-    document.getElementById("selectBrand").value = "";
-    document.getElementById("selectModel").value = "";
+    const selectBrand = document.getElementById("selectBrand");
+    selectBrand.selectedIndex = 0;
+    const selectModel = document.getElementById("selectModel");
+    selectModel.selectedIndex = 0;
     document.getElementById("url").value = ""; 
 }
 
@@ -293,6 +295,7 @@ function showRegister()
                 {
                     lista.Delete(buttonDelete.getIdRegister()-1);
                     showRegister();
+                    alert("Se ha eliminado correctamente.")
                 });
             buttonEditar.AddEvent(() => {
                     editVehicle(buttonEditar.getIdRegister() - 1);
@@ -303,6 +306,8 @@ function showRegister()
             const tr = new Tr((index+1), item);
             tr.AddButtons(buttonEditar, buttonDelete);
             table.Add(tr.getTr(), tr.getMiniTr());
+            register.getButton().classList.remove('hidden');
+            update.getButton().classList.add('hidden');
         });
 
 }
@@ -352,7 +357,11 @@ function UpdateVehiculo(index)
     document.getElementById("address").value = "";
     document.getElementById("idCar").value = "";
     document.getElementById("year").value = "";
-    document.getElementById("selectBrand").value = "";
-    document.getElementById("selectModel").value = "";
+    const selectBrand = document.getElementById("selectBrand");
+    selectBrand.selectedIndex = 0;
+    const selectModel = document.getElementById("selectModel");
+    selectModel.selectedIndex = 0;
     document.getElementById("url").value = ""; 
+
+
 }
