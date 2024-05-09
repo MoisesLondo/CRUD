@@ -1,4 +1,4 @@
-import Tr from "./src/components/Tr.js";
+import Tr from "../src/components/Tr.js";
 
 function extractionsDatos()
 {   
