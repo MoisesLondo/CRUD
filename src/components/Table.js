@@ -4,11 +4,13 @@ class Table
     container = document.createElement('div');
     containerMiniTr = document.createElement('div');
     containerMain = document.createElement('div');
+    tbody = document.createElement('tbody');
     constructor()
     {
         this.containerMain.className = "w-4/6 flex flex-col items-center";
         this.container.className = "w-11/12 rounded-lg shadow hidden md:block";
         this.containerMiniTr.className = "w-11/12 grid grid-cols-1 gap-4 md:hidden";
+        this.tbody.className = "divide-y divide-gray-100";
         this.table.className = "w-full";
         this.table.innerHTML= 
         `
@@ -21,8 +23,8 @@ class Table
                 <th class="p-3 text-sm font-semibold tracking-wide text-center">Color</th>
                 <th class="p-3 text-sm font-semibold tracking-wide text-center">Acciones</th>
             </thead>
-            <tbody class="divide-y divide-gray-100"></tbody>
         `;
+        this.table.appendChild(this.tbody);
         this.container.appendChild(this.table);
         this.containerMain.appendChild(this.container);
         document.getElementById("container-main").appendChild(this.containerMiniTr);
@@ -33,6 +35,10 @@ class Table
     {
         this.table.childNodes.item(3).appendChild(obj);
         this.containerMiniTr.appendChild(obj1)
+    }
+    ClearTbody()
+    {
+        this.tbody.innerHTML = "";
     }
 }
 

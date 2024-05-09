@@ -1,13 +1,12 @@
-import ButtonImage from "./ButtonImg.js";
 export default class Tr
 {
-    tr = document.createElement('tr');;
+    id;
+    tr = document.createElement('tr');
     miniTr = document.createElement('div');
     containerButton = document.createElement('span');
-    buttonEditar = new ButtonImage("buttonEditar", "Editar", "#00B05D", "white");
-    buttonDelete = new ButtonImage("buttonDelete", "Eliminar", "#E03625", "white");
     constructor(id, vehicle)
     {
+        this.id = id;
         this.containerButton.className = "inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm";
         this.miniTr.className = "bg-gray-200 p-4 rounded-lg shadow";
         this.tr.className = id%2 ? "bg-white" : "bg-gray-50";
@@ -40,13 +39,12 @@ export default class Tr
                 <span class="text-md text-rose-500">${vehicle.getLicensePlate()}</span>
             </div>
         `;
-        this.containerButton.appendChild(this.buttonEditar.getButton());
-        this.containerButton.appendChild(this.buttonDelete.getButton());
+
     }
-    AddButtons(buttons)
+    AddButtons(buttonEditar, buttonDelete)
     {
-        this.buttonEditar.AddEvent(eventEditar);
-        this.buttonDelete.AddEvent(eventEliminar);
+        this.containerButton.appendChild(buttonEditar.getButton());
+        this.containerButton.appendChild(buttonDelete.getButton());
     }
     getTr()
     {
@@ -55,6 +53,10 @@ export default class Tr
     getMiniTr()
     {
         return this.miniTr;
+    }
+    getId()
+    {
+        return this.id;
     }
 
 }
