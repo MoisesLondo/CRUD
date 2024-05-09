@@ -12,18 +12,20 @@ class Form
 {
     containerMain = document.createElement('div');
     formMini = document.createElement('div');
-    constructor(components, componentsMini, button, buttonMini)
+    constructor(titulo, components, componentsMini, button, buttonMini)
     {   
         const form = document.createElement("div");
         const container = document.createElement('div');
         const containerButton = document.createElement('div');
         const containerButtonMini = document.createElement('div');
+        const tituloContainer = document.createElement('span');
+        tituloContainer.className = "text-2xl text-rose-500 tracking-wider";
         this.containerMain.className = "w-1/4 flex flex-col items-center";
         container.className = 'w-full p-4 rounded-xl shadow hidden md:block';
         containerButton.className = 'w-full flex flex-row gap-3';
         containerButtonMini.className = 'w-full flex flex-row gap-3';
         this.formMini.className = 'w-10/12 flex flex-col gap-6 p-4 rounded-xl shadow md:hidden';
-        form.className = "flex flex-col gap-3";
+        form.className = "flex flex-col gap-6";
         
         components.forEach((item)=>
         {
@@ -45,7 +47,9 @@ class Form
             containerButtonMini.appendChild(item.getButton());
         });
 
-        container.appendChild(form)
+        tituloContainer.innerHTML = titulo;
+        this.containerMain.appendChild(tituloContainer);
+        container.appendChild(form);
         this.containerMain.appendChild(container);
         document.getElementById("container-wrapped").appendChild(this.containerMain);
         document.getElementById("container-main").appendChild(this.formMini); 
@@ -60,7 +64,6 @@ class Form
     }
 }
 const lista = new Lista();
-const listaRe = new Lista();
 const inputName = new Input("name", "Nombre", "text", "Isidoro");
 inputName.container.addEventListener("input", validateInput);
 
@@ -81,7 +84,7 @@ const inputTLFMini = new Input("miniTlf", "Telefono", "tel", "XXX-8968401");
 const inputAddressMini = new Input("miniAddress", "Correo", "text", "ex-ple@email.com");
 const buttonMini = new Button("miniButon", "Siguiente");
 
-export const form = new Form([inputName, inputLastName, inputIDN, inputTLF, inputAddress],[inputNameMini, inputLastNameMini, inputIDNMini, inputTLFMini, inputAddressMini],[button],[buttonMini]);
+export const form = new Form("Formulario para Persona",[inputName, inputLastName, inputIDN, inputTLF, inputAddress],[inputNameMini, inputLastNameMini, inputIDNMini, inputTLFMini, inputAddressMini],[button],[buttonMini]);
 
 const inputCar = new Input("idCar", "Placa", "text", "AB123CD");
 const inputYearCar = new Input("year", "Año del vehículo", "text", "2015");
@@ -99,7 +102,7 @@ selectMarca.AddEvent(()=>
             (Select.value == "toyota") ? ["Supra", "Corolla", "Starlet"] : 
             (Select.value == "nissan") ? ["GT-R", "370z", "Skyline"]: 
             (Select.value == "mazda") ? ["MX-5 Miata", "RX-8", "MX-6"] :
-            (Select.value == "lexus") ? ["Lancer Evolution IX", "Galant VR-4", "Eclipse"] :
+            (Select.value == "mitsubishi") ? ["Lancer Evolution IX", "Galant VR-4", "Eclipse"] :
             (Select.value == "subaru") ? ["BRZ", "WRX STI", "Legacy"]: [""]; 
         selectModelo.AddOptions(list); 
     })
@@ -122,7 +125,7 @@ selectMarcaMini.AddEvent(()=>
             (Select.value == "toyota") ? ["Supra", "Corolla", "Starlet"] : 
             (Select.value == "nissan") ? ["GT-R", "370z", "Skyline"]: 
             (Select.value == "mazda") ? ["MX-5 Miata", "RX-8", "MX-6"] :
-            (Select.value == "lexus") ? ["Lancer Evolution IX", "Galant VR-4", "Eclipse"] :
+            (Select.value == "mitsubishi") ? ["Lancer Evolution IX", "Galant VR-4", "Eclipse"] :
             (Select.value == "subaru") ? ["BRZ", "WRX STI", "Legacy"]: [""]; 
         selectModeloMini.AddOptions(list); 
     })
@@ -132,22 +135,18 @@ const miniUrl = new Input("url", "Imagen", "url", "https://....com");
 const registerMini = new Button("miniFinish", "Registrar");
 const miniBack = new Button("miniBack", "Atrás");
 
-export const form2 = new Form([inputCar, inputYearCar, inputColor, selectMarca, selectModelo, url],[inputCarMini, inputYearCarMini, inputColorMini, selectMarcaMini, selectModeloMini, miniUrl],[back, register, update],[miniBack, registerMini]);
+export const form2 = new Form("Formulario para Vehiculo",[inputCar, inputYearCar, inputColor, selectMarca, selectModelo, url],[inputCarMini, inputYearCarMini, inputColorMini, selectMarcaMini, selectModeloMini, miniUrl],[back, register, update],[miniBack, registerMini]);
 form2.getContainerMain().classList.add('hidden');
 form2.getFormMini().classList.add('hidden');
 
 button.AddEvent((e) => validationFormPerson() ? PaginationForm() : e.stopImmediatePropagation());
 buttonMini.AddEvent((e) => validationFormPerson() ? PaginationForm() : e.stopImmediatePropagation());
-button.AddEvent(PaginationForm);
-buttonMini.AddEvent(PaginationForm);
 back.AddEvent(PaginationFormBack);
 miniBack.AddEvent(PaginationFormBack);
 inputColor.AddEvent(ChangeColor);
-register.AddEvent((e) => validationFormCar() ? Register : e.stopImmediatePropagation())
-registerMini.AddEvent((e) => validationFormCar() ? Register : e.stopImmediatePropagation())
-register.AddEvent(Register);
+register.AddEvent((e) => validationFormCar() ? Register() : e.stopImmediatePropagation())
+registerMini.AddEvent((e) => validationFormCar() ? Register() : e.stopImmediatePropagation())
 
-registerMini.AddEvent(Register);
 
 
 function validationFormPerson(){

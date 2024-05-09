@@ -7,7 +7,10 @@ class Table
     tbody = document.createElement('tbody');
     constructor()
     {
-        this.containerMain.className = "w-4/6 flex flex-col items-center";
+        const titulo = document.createElement('span');
+        titulo.innerHTML = "Lista de Vehiculos";
+        titulo.className = "text-2xl text-rose-500 tracking-wider";
+        this.containerMain.className = "w-4/6 flex flex-col items-center gap-5";
         this.container.className = "w-11/12 rounded-lg shadow hidden md:block";
         this.containerMiniTr.className = "w-11/12 grid grid-cols-1 gap-4 md:hidden";
         this.tbody.className = "divide-y divide-gray-100";
@@ -25,6 +28,7 @@ class Table
             </thead>
         `;
         this.table.appendChild(this.tbody);
+        this.containerMain.appendChild(titulo);
         this.container.appendChild(this.table);
         this.containerMain.appendChild(this.container);
         document.getElementById("container-main").appendChild(this.containerMiniTr);

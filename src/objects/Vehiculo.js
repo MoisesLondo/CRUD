@@ -43,28 +43,5 @@ export default class Vehicle
     {
         return this.model;
     }
-    setBrand(newBrand) {
-        this.brand = newBrand;
-      }
-    
-      setModel(newModel) {
-        this.model = newModel;
-      }
-    
-      setColour(newColour) {
-        this.colour = newColour;
-      }
-    
-      setLicensePlate(newLicensePlate) {
-        this.licensePlate = newLicensePlate;
-      }
-    
-      setYearVehicle(newYearVehicle) {
-        this.yearVehicle = newYearVehicle;
-      }
-    
-      setPictureVehicle(newPictureVehicle) {
-        this.pictureVehicle = newPictureVehicle;
-      }
     
 }
