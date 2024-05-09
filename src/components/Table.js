@@ -40,6 +40,10 @@ class Table
     {
         this.tbody.innerHTML = "";
     }
+    ClearTrs()
+    {
+        this.containerMiniTr.innerHTML= "";
+    }
 }
 
 const table = new Table()

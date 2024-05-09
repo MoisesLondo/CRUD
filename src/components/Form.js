@@ -130,8 +130,10 @@ const inputColorMini = new Color("miniColor", "miniSpanColor");
 const miniUrl = new Input("miniUrl", "Imagen", "url", "https://....com");
 const registerMini = new Button("miniFinish", "Registrar");
 const miniBack = new Button("miniBack", "Atrás");
+const miniUpdate = new Button("miniUpdate", "Editar");
+miniUpdate.getButton().classList.add('hidden');
 
-export const form2 = new Form("Formulario para Vehiculo",[inputCar, inputYearCar, inputColor, selectMarca, selectModelo, url],[inputCarMini, inputYearCarMini, inputColorMini, selectMarcaMini, selectModeloMini, miniUrl],[back, register, update],[miniBack, registerMini]);
+export const form2 = new Form("Formulario para Vehiculo",[inputCar, inputYearCar, inputColor, selectMarca, selectModelo, url],[inputCarMini, inputYearCarMini, inputColorMini, selectMarcaMini, selectModeloMini, miniUrl],[back, register, update],[miniBack, registerMini, miniUpdate]);
 form2.getContainerMain().classList.add('hidden');
 form2.getFormMini().classList.add('hidden');
 
@@ -140,8 +142,8 @@ buttonMini.AddEvent((e) => validationFormPerson("miniName", "miniLastName","mini
 back.AddEvent(PaginationFormBack);
 miniBack.AddEvent(PaginationFormBack);
 inputColor.AddEvent(ChangeColor);
-register.AddEvent((e) => validationFormCar("idCar", "year", "inputColor", "selectBrand", "selectModel") ? Register() : e.stopImmediatePropagation())
-registerMini.AddEvent((e) => validationFormCar("miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel") ? RegisterMini() : e.stopImmediatePropagation())
+register.AddEvent((e) => validationFormCar("idCar", "year", "inputColor", "selectBrand", "selectModel", "url") ? Register() : e.stopImmediatePropagation())
+registerMini.AddEvent((e) => validationFormCar("miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel", "miniUrl") ? RegisterMini() : e.stopImmediatePropagation())
 
 
 
@@ -167,19 +169,19 @@ function validationFormPerson(idName, idLastname, idCed, idTlf, idAddress){
            true;
 }
 
-function validationFormCar(idCar, idYear, idColor, idSelectBrand, idSelectModel){
-    const placa = document.getElementById(idCar).value
-    const year = document.getElementById(idYear).value
-    const color = document.getElementById(idColor).value
-    const marca = document.getElementById(idSelectBrand).value
-    const modelo = document.getElementById(idSelectModel).value
+function validationFormCar(idCar, idYear, idColor, idSelectBrand, idSelectModel, url){
+    const placa = document.getElementById(idCar).value;
+    const year = document.getElementById(idYear).value;
+    const color = document.getElementById(idColor).value;
+    const marca = document.getElementById(idSelectBrand).value;
+    const modelo = document.getElementById(idSelectModel).value;
 
     const isFormValid = (placa === "" || year === "" || color === "" || marca === "" || modelo === "" || url === "") ? false : true;
     const isYearValid = (year.length >= 4 && year.length <= 4) ? true : false;
     const isIdCarValid = (placa.length >= 6 && placa.length <= 7) ? true : false;
     const yearNumber = parseInt(year, 10);
     const isYearValid2 = (yearNumber >= 1960 && yearNumber <= 2024);
-    const isUrlValid = (expresion.test(url))
+    const isUrlValid = true;
 
     return(!isFormValid) ? (alert("Todos los campos son obligatorios."), false) :
     (!isYearValid) ? (alert("Ingrese el año del vehículo en formato AAAA."), false) :
@@ -316,6 +318,7 @@ function extractionsMiniDatosCar()
 function showRegister()
 {
     table.ClearTbody();
+    table.ClearTrs();
     lista.getList().forEach((item, index) =>
         {
             const buttonEditar = new ButtonOptions("buttonEditar", "Editar", "#00B05D", "white",(index+1));
@@ -326,18 +329,26 @@ function showRegister()
                 {
                     lista.Delete(buttonDelete.getIdRegister()-1);
                     showRegister();
-                    alert("Se ha eliminado correctamente.")
+                });
+            buttonDeleteMini.AddEvent(()=>
+                {
+                    lista.Delete(buttonDeleteMini.getIdRegister()-1);
+                    showRegister();
                 });
             buttonEditar.AddEvent(() => {
                     editVehicle(buttonEditar.getIdRegister() - 1);
                     register.getButton().classList.add('hidden');
                     update.getButton().classList.remove('hidden');
                   });
+            buttonEditarMini.AddEvent(() => {
+                    editVehicleMini(buttonEditarMini.getIdRegister() - 1);
+                    registerMini.getButton().classList.add('hidden');
+                    miniUpdate.getButton().classList.remove('hidden');
+                  });
                   
             const tr = new Tr((index+1), item);
             tr.AddButtons(buttonEditar, buttonDelete);
             tr.AddButtonsMini(buttonEditarMini, buttonDeleteMini);
-            console.log(tr);
             table.Add(tr.getTr(), tr.getMiniTr());
             register.getButton().classList.remove('hidden');
             update.getButton().classList.add('hidden');
@@ -361,7 +372,26 @@ function editVehicle(index) {
     document.getElementById("ced").value = person.getIdn();
     document.getElementById("address").value = person.getAddress();
     document.getElementById("tlf").value = person.getTlf();
-    update.AddEvent((e) => validationFormCar() ? UpdateVehiculo(index) : e.stopImmediatePropagation());
+    update.AddEvent((e) => validationFormCar("idCar", "year", "inputColor", "selectBrand", "selectModel", "url") ? UpdateVehiculo(index) : e.stopImmediatePropagation());
+}
+
+function editVehicleMini(index) {
+    const vehicle = lista.getList()[index];
+    const person = vehicle.getOwn();
+    
+    document.getElementById("miniIdCar").value = vehicle.getLicensePlate();
+    document.getElementById("miniYear").value = vehicle.getYearVehicle();
+    document.getElementById("miniColor").value = vehicle.getColour();
+    document.getElementById("miniSelectBrand").value = vehicle.getBrand();
+    document.getElementById("miniSelectModel").value = vehicle.getModel();
+    document.getElementById("miniUrl").value = vehicle.getPictureVehicle();
+    
+    document.getElementById("miniName").value = person.getName();
+    document.getElementById("miniLastName").value = person.getLastName();
+    document.getElementById("miniCed").value = person.getIdn();
+    document.getElementById("miniAddress").value = person.getAddress();
+    document.getElementById("miniTlf").value = person.getTlf();
+    miniUpdate.AddEvent((e) => validationFormCar("miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel", "miniUrl") ? UpdateVehiculoMini(index) : e.stopImmediatePropagation());
 }
 
 function UpdateVehiculo(index)
@@ -386,7 +416,28 @@ function UpdateVehiculo(index)
     ClearCampos(["name", "lastName", "ced", "tlf", "address", "idCar", "year", "selectBrand", "selectModel", "url"])
     ClearCampos(["miniName", "miniLastName", "miniCed", "miniTlf", "miniAddress", "miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel", "miniUrl"]);
 }
+function UpdateVehiculoMini(index)
+{
+    form2.getContainerMain().classList.add('hidden');
+    form2.getFormMini().classList.add('hidden');
 
+    form.getContainerMain().classList.remove('hidden');
+    form.getFormMini().classList.remove('hidden');
+
+    const { name, lastname, idn, tlf, address } = extractionsMiniDatosPeople();
+    const Persona = new People(name, lastname, idn, tlf, address);
+    const { car, year, brand, modelo, color, url } = extractionsMiniDatosCar();
+    const Vehiculo = new Vehicle( brand, modelo, color, car, year, url)
+    Vehiculo.asigOwn(Persona);
+
+
+    lista.Update(index, Vehiculo);
+    showRegister();
+
+
+    ClearCampos(["name", "lastName", "ced", "tlf", "address", "idCar", "year", "selectBrand", "selectModel", "url"])
+    ClearCampos(["miniName", "miniLastName", "miniCed", "miniTlf", "miniAddress", "miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel", "miniUrl"]);
+}
 function ClearCampos(list)
 {
     list.forEach((item) =>

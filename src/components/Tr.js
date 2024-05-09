@@ -10,6 +10,7 @@ export default class Tr
         this.id = id;
         this.containerButton.className = "inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm";
         this.containerMiniButton.className = "inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm";
+        this.miniTr.id = "miniTrs";
         this.miniTr.className = "bg-gray-200 p-4 rounded-lg shadow";
         this.tr.className = id%2 ? "bg-white" : "bg-[#FFDFD0]";
         this.tr.innerHTML = 
@@ -27,7 +28,6 @@ export default class Tr
             <td class="text-sm text-gray-700 whitespace-nowrap text-center"></td>  
         `;
         this.tr.childNodes.item(13).appendChild(this.containerButton);
-        console.log(this.containerButton);
         this.miniTr.innerHTML = 
         `
             <div class="flex flex-row justify-between">
