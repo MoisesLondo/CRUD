@@ -7,7 +7,7 @@ export default class Button
         this.containerButton.className = "w-full";
         this.button.id = id;
         this.button.innerHTML = buttonName;
-        this.button.className = "w-full p-2 bg-rose-400 rounded-lg text-white hover:bg-rose-600 transform-all duration-75 ease-in-out:hover";
+        this.button.className = "w-full p-2 bg-[#FF9E8F] rounded-lg text-white hover:bg-[#C63637] transform-all duration-75 ease-in-out:hover";
         this.containerButton.appendChild(this.button);
     }
     getButton()
