@@ -11,7 +11,7 @@ export default class ButtonOptions
     }
     AddEvent(event)
     {
-        this.button.addEventListener('click', event)
+        this.button.onclick = event;
     }
     getButton()
     {

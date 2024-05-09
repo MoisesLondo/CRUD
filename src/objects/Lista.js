@@ -17,8 +17,4 @@ export default class Lista
     {
         return this.list;
     }
-    getLenght()
-    {
-        return this.lenght;
-    }
 }

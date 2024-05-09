@@ -227,8 +227,6 @@ function ChangeColor()
 }
 function Register()
 {
-
-
     form2.getContainerMain().classList.add('hidden');
     form2.getFormMini().classList.add('hidden');
 
@@ -241,27 +239,10 @@ function Register()
     const Vehiculo = new Vehicle( brand, modelo, color, car, year, url)
     Vehiculo.asigOwn(Persona);
 
-    table.ClearTbody();
+
     lista.Add(Vehiculo);
-    lista.getList().forEach((item, index) =>
-        {
-            const buttonEditar = new ButtonOptions("buttonEditar", "Editar", "#00B05D", "white",(index+1));
-            const buttonDelete = new ButtonOptions("buttonDelete", "Eliminar", "#E03625", "white",(index+1));
-            buttonDelete.AddEvent(()=>
-                {
-                    lista.Delete(buttonDelete.getIdRegister()-1);
-                    console.log(lista.getList());
-                    lista.getList().forEach((item, index)=>
-                        {
-                            const tr = new Tr((index+1), item);
-                            tr.AddButtons(buttonEditar, buttonDelete);
-                            table.Add(tr.getTr(), tr.getMiniTr());
-                        })
-                });
-            const tr = new Tr((index+1), item);
-            tr.AddButtons(buttonEditar, buttonDelete);
-            table.Add(tr.getTr(), tr.getMiniTr());
-        });
+    showRegister();
+
 
     document.getElementById("name").value = "";
     document.getElementById("lastName").value = "";
@@ -296,4 +277,23 @@ function extractionsDatosCar()
     const url = document.getElementById("url").value;
     
     return {car, year, brand, modelo, color, url};
+}
+
+function showRegister()
+{
+    table.ClearTbody();
+    lista.getList().forEach((item, index) =>
+        {
+            const buttonEditar = new ButtonOptions("buttonEditar", "Editar", "#00B05D", "white",(index+1));
+            const buttonDelete = new ButtonOptions("buttonDelete", "Eliminar", "#E03625", "white",(index+1));
+            buttonDelete.AddEvent(()=>
+                {
+                    lista.Delete(buttonDelete.getIdRegister()-1);
+                    showRegister();
+                });
+            const tr = new Tr((index+1), item);
+            tr.AddButtons(buttonEditar, buttonDelete);
+            table.Add(tr.getTr(), tr.getMiniTr());
+        });
+
 }
