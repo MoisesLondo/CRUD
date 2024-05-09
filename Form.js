@@ -339,11 +339,15 @@ function showRegister()
                 });
             buttonEditar.AddEvent(() => {
                     editVehicle(buttonEditar.getIdRegister() - 1);
+                    buttonDelete.getButton().disabled = true;
+                    buttonDeleteMini.getButton().disabled = true;
                     register.getButton().classList.add('hidden');
                     update.getButton().classList.remove('hidden');
                   });
             buttonEditarMini.AddEvent(() => {
                     editVehicleMini(buttonEditarMini.getIdRegister() - 1);
+                    buttonDelete.getButton().disabled = true;
+                    buttonDeleteMini.getButton().disabled = true;
                     registerMini.getButton().classList.add('hidden');
                     miniUpdate.getButton().classList.remove('hidden');
                   });
@@ -413,7 +417,6 @@ function UpdateVehiculo(index)
 
     lista.Update(index, Vehiculo);
     showRegister();
-
 
     ClearCampos(["name", "lastName", "ced", "tlf", "address", "idCar", "year", "selectBrand", "selectModel", "url"])
     ClearCampos(["miniName", "miniLastName", "miniCed", "miniTlf", "miniAddress", "miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel", "miniUrl"]);
