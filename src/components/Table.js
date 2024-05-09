@@ -13,7 +13,7 @@ class Table
         this.table.innerHTML= 
         `
             <thead class="w-full bg-gray-50 border-b-2 border-gray-200 ">
-                <th class="w-20 p-3 text-sm font-semibold tracking-wide text-center">Imagen</th>
+                <th class="p-3 text-sm font-semibold tracking-wide text-center">Imagen</th>
                 <th class="p-3 text-sm font-semibold tracking-wide text-center">Nombre</th>
                 <th class="p-3 text-sm font-semibold tracking-wide text-center">Apellido</th>
                 <th class="p-3 text-sm font-semibold tracking-wide text-center">Cedula</th>

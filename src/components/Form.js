@@ -221,7 +221,6 @@ function ChangeColor()
     const span = document.getElementById("spanColor");
     span.innerHTML = inputColor.getInputColor().value;
     span.value = inputColor.getInputColor().value;
-    console.log(span.value);
 }
 function Register()
 {
@@ -235,7 +234,6 @@ function Register()
     const Persona = new People(name, lastname, idn, tlf, address);
     const { car, year, brand, modelo, color, url } = extractionsDatosCar();
     const Vehiculo = new Vehicle( brand, modelo, color, car, year, url)
-    console.log(color);
     Vehiculo.asigOwn(Persona);
     const tr = new Tr(1, Vehiculo);
     table.Add(tr.getTr(), tr.getMiniTr());
@@ -247,7 +245,10 @@ function Register()
     document.getElementById("address").value = "";
     document.getElementById("idCar").value = "";
     document.getElementById("year").value = "";
-
+    document.getElementById("selectBrand").value = "";
+    console.log(document.getElementById("selectBrand"));
+    document.getElementById("selectModel").value = "";
+    document.getElementById("url").value = ""; 
 }
 
 function extractionsDatosPeople()
