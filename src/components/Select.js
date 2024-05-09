@@ -25,6 +25,7 @@ export default class Select
     AddOptions(options)
     {
         this.select.innerHTML = "";
+        this.optionDefault.value = "";
         this.select.appendChild(this.optionDefault);
         options.forEach((item) =>
         {

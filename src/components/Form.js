@@ -66,18 +66,18 @@ inputName.container.addEventListener("input", validateInput);
 const inputLastName = new Input("lastName", "Apellido", "text", "Navarro");
 inputLastName.container.addEventListener("input", validateInput);
 
-const inputIDN = new Input("ced", "Cedula", "text", "30.292.216");
+const inputIDN = new Input("ced", "Cedula", "text", "30292216");
 inputIDN.container.addEventListener("input", validateInputNumbers);
 
 const inputTLF = new Input("tlf", "Telefono", "tel", "XXX-8968401");
-const inputAddress = new Input("address", "Correo", "text", "ex-ple@email.com");
+const inputAddress = new Input("address", "Dirección", "text", "Carabobo");
 const button = new Button("buton", "Siguiente");
 
 const inputNameMini = new Input("miniName", "Nombre", "text", "Isidoro");
 const inputLastNameMini = new Input("miniLastName", "Apellido", "text", "Navarro");
 const inputIDNMini = new Input("miniCed", "Cedula", "text", "30.292.216");
 const inputTLFMini = new Input("miniTlf", "Telefono", "tel", "XXX-8968401");
-const inputAddressMini = new Input("miniAddress", "Correo", "text", "ex-ple@email.com");
+const inputAddressMini = new Input("miniAddress", "Dirección", "text", "Carabobo");
 const buttonMini = new Button("miniButon", "Siguiente");
 
 export const form = new Form("Formulario para Persona",[inputName, inputLastName, inputIDN, inputTLF, inputAddress],[inputNameMini, inputLastNameMini, inputIDNMini, inputTLFMini, inputAddressMini],[button],[buttonMini]);
@@ -99,7 +99,8 @@ selectMarca.AddEvent(()=>
             (Select.value == "nissan") ? ["GT-R", "370z", "Skyline"]: 
             (Select.value == "mazda") ? ["MX-5 Miata", "RX-8", "MX-6"] :
             (Select.value == "mitsubishi") ? ["Lancer Evolution IX", "Galant VR-4", "Eclipse"] :
-            (Select.value == "subaru") ? ["BRZ", "WRX STI", "Legacy"]: [""]; 
+            (Select.value == "subaru") ? ["BRZ", "WRX STI", "Legacy"]:
+            (Select.value == "")? [""] : [""]; 
         selectModelo.AddOptions(list); 
     })
 const url = new Input("url", "Imagen", "url", "https://....com");
@@ -122,7 +123,8 @@ selectMarcaMini.AddEvent(()=>
             (Select.value == "nissan") ? ["GT-R", "370z", "Skyline"]: 
             (Select.value == "mazda") ? ["MX-5 Miata", "RX-8", "MX-6"] :
             (Select.value == "mitsubishi") ? ["Lancer Evolution IX", "Galant VR-4", "Eclipse"] :
-            (Select.value == "subaru") ? ["BRZ", "WRX STI", "Legacy"]: [""]; 
+            (Select.value == "subaru") ? ["BRZ", "WRX STI", "Legacy"]: 
+            (Select.value == "")? [""] : [""]; 
         selectModeloMini.AddOptions(list); 
     })
 
@@ -144,8 +146,10 @@ miniBack.AddEvent(PaginationFormBack);
 inputColor.AddEvent(ChangeColor);
 register.AddEvent((e) => validationFormCar("idCar", "year", "inputColor", "selectBrand", "selectModel", "url") ? Register() : e.stopImmediatePropagation())
 registerMini.AddEvent((e) => validationFormCar("miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel", "miniUrl") ? RegisterMini() : e.stopImmediatePropagation())
-
-
+window.addEventListener('resize', () =>
+    {
+        (window.innerWidth <= 769)? PaginationFormBack() : "";
+    });
 
 function validationFormPerson(idName, idLastname, idCed, idTlf, idAddress){
     const name = document.getElementById(idName).value
