@@ -163,7 +163,7 @@ function validationFormPerson(idName, idLastname, idCed, idTlf, idAddress){
     return (!isFormValid) ? (alert("Todos los campos son obligatorios."), false) :
            (!isIdnValid) ? (alert("La cédula debe tener entre 6 y 8 caracteres."), false) :
            (!isEmailValid) ? (alert("El correo es invalido."), false) :
-           (!isTlfValid) ? (alert("El número de teléfono no es valido"), false) : 
+           (!isTlfValid) ? (alert("El número de teléfono no es valido."), false) : 
            true;
 }
 
@@ -174,17 +174,19 @@ function validationFormCar(idCar, idYear, idColor, idSelectBrand, idSelectModel)
     const marca = document.getElementById(idSelectBrand).value
     const modelo = document.getElementById(idSelectModel).value
 
-    const isFormValid = (placa === "" || year === "" || color === "" || marca === "" || modelo === "") ? false : true;
+    const isFormValid = (placa === "" || year === "" || color === "" || marca === "" || modelo === "" || url === "") ? false : true;
     const isYearValid = (year.length >= 4 && year.length <= 4) ? true : false;
     const isIdCarValid = (placa.length >= 6 && placa.length <= 7) ? true : false;
     const yearNumber = parseInt(year, 10);
     const isYearValid2 = (yearNumber >= 1960 && yearNumber <= 2024);
+    const isUrlValid = (expresion.test(url))
 
     return(!isFormValid) ? (alert("Todos los campos son obligatorios."), false) :
     (!isYearValid) ? (alert("Ingrese el año del vehículo en formato AAAA."), false) :
-    (!isYearValid2) ? (alert("Año invalido"), false) :
-    (!isIdCarValid) ? (alert("Placa invalida"), false) :
-    true;
+    (!isYearValid2) ? (alert("Año invalido."), false) :
+    (!isIdCarValid) ? (alert("Placa invalida."), false) :
+    (!isUrlValid) ? (alert("La URL no es valida.")) :
+    (alert("Registrado correctamente.")), true;
 }
 function validateInput(e) {
     const input = e.target;
@@ -324,6 +326,7 @@ function showRegister()
                 {
                     lista.Delete(buttonDelete.getIdRegister()-1);
                     showRegister();
+                    alert("Se ha eliminado correctamente.")
                 });
             buttonEditar.AddEvent(() => {
                     editVehicle(buttonEditar.getIdRegister() - 1);
@@ -336,6 +339,8 @@ function showRegister()
             tr.AddButtonsMini(buttonEditarMini, buttonDeleteMini);
             console.log(tr);
             table.Add(tr.getTr(), tr.getMiniTr());
+            register.getButton().classList.remove('hidden');
+            update.getButton().classList.add('hidden');
         });
 
 }
