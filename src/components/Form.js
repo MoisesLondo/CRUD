@@ -127,7 +127,7 @@ selectMarcaMini.AddEvent(()=>
     })
 
 const inputColorMini = new Color("miniColor", "miniSpanColor");
-const miniUrl = new Input("url", "Imagen", "url", "https://....com");
+const miniUrl = new Input("miniUrl", "Imagen", "url", "https://....com");
 const registerMini = new Button("miniFinish", "Registrar");
 const miniBack = new Button("miniBack", "Atrás");
 
@@ -135,22 +135,22 @@ export const form2 = new Form("Formulario para Vehiculo",[inputCar, inputYearCar
 form2.getContainerMain().classList.add('hidden');
 form2.getFormMini().classList.add('hidden');
 
-button.AddEvent((e) => validationFormPerson() ? PaginationForm() : e.stopImmediatePropagation());
-buttonMini.AddEvent((e) => validationFormPerson() ? PaginationForm() : e.stopImmediatePropagation());
+button.AddEvent((e) => validationFormPerson("name", "lastName","ced", "tlf", "address") ? PaginationForm() : e.stopImmediatePropagation());
+buttonMini.AddEvent((e) => validationFormPerson("miniName", "miniLastName","miniCed", "miniTlf", "miniAddress") ? PaginationForm() : e.stopImmediatePropagation());
 back.AddEvent(PaginationFormBack);
 miniBack.AddEvent(PaginationFormBack);
 inputColor.AddEvent(ChangeColor);
-register.AddEvent((e) => validationFormCar() ? Register() : e.stopImmediatePropagation())
-registerMini.AddEvent((e) => validationFormCar() ? Register() : e.stopImmediatePropagation())
+register.AddEvent((e) => validationFormCar("idCar", "year", "inputColor", "selectBrand", "selectModel") ? Register() : e.stopImmediatePropagation())
+registerMini.AddEvent((e) => validationFormCar("miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel") ? RegisterMini() : e.stopImmediatePropagation())
 
 
 
-function validationFormPerson(){
-    const name = document.getElementById("name").value
-    const lastName = document.getElementById("lastName").value
-    const idn = document.getElementById("ced").value
-    const tlf = document.getElementById("tlf").value
-    const address = document.getElementById("address").value
+function validationFormPerson(idName, idLastname, idCed, idTlf, idAddress){
+    const name = document.getElementById(idName).value
+    const lastName = document.getElementById(idLastname).value
+    const idn = document.getElementById(idCed).value
+    const tlf = document.getElementById(idTlf).value
+    const address = document.getElementById(idAddress).value
     const expresion = /^\S+@\S+\.\S+$/
     const phoneRegex = /^(0412|0414|0424|0426)-\d{7}$/;
 
@@ -167,12 +167,12 @@ function validationFormPerson(){
            true;
 }
 
-function validationFormCar(){
-    const placa = document.getElementById("idCar").value
-    const year = document.getElementById("year").value
-    const color = document.getElementById("inputColor").value
-    const marca = document.getElementById("selectBrand").value
-    const modelo = document.getElementById("selectModel").value
+function validationFormCar(idCar, idYear, idColor, idSelectBrand, idSelectModel){
+    const placa = document.getElementById(idCar).value
+    const year = document.getElementById(idYear).value
+    const color = document.getElementById(idColor).value
+    const marca = document.getElementById(idSelectBrand).value
+    const modelo = document.getElementById(idSelectModel).value
 
     const isFormValid = (placa === "" || year === "" || color === "" || marca === "" || modelo === "") ? false : true;
     const isYearValid = (year.length >= 4 && year.length <= 4) ? true : false;
@@ -241,17 +241,31 @@ function Register()
     lista.Add(Vehiculo);
     showRegister();
 
+    ClearCampos(["name", "lastName", "ced", "tlf", "address", "idCar", "year", "selectBrand", "selectModel", "url"])
+    ClearCampos(["miniName", "miniLastName", "miniCed", "miniTlf", "miniAddress", "miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel", "miniUrl"]);
+}
 
-    document.getElementById("name").value = "";
-    document.getElementById("lastName").value = "";
-    document.getElementById("ced").value = "";
-    document.getElementById("tlf").value = "";
-    document.getElementById("address").value = "";
-    document.getElementById("idCar").value = "";
-    document.getElementById("year").value = "";
-    document.getElementById("selectBrand").value = "";
-    document.getElementById("selectModel").value = "";
-    document.getElementById("url").value = ""; 
+function RegisterMini()
+{
+    form2.getContainerMain().classList.add('hidden');
+    form2.getFormMini().classList.add('hidden');
+
+    form.getContainerMain().classList.remove('hidden');
+    form.getFormMini().classList.remove('hidden');
+
+    const { name, lastname, idn, tlf, address } = extractionsMiniDatosPeople();
+    const Persona = new People(name, lastname, idn, tlf, address);
+    const { car, year, brand, modelo, color, url } = extractionsMiniDatosCar();
+    const Vehiculo = new Vehicle( brand, modelo, color, car, year, url)
+    Vehiculo.asigOwn(Persona);
+
+
+    lista.Add(Vehiculo);
+    showRegister();
+
+    ClearCampos(["name", "lastName", "ced", "tlf", "address", "idCar", "year", "selectBrand", "selectModel", "url"])
+    ClearCampos(["miniName", "miniLastName", "miniCed", "miniTlf", "miniAddress", "miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel", "miniUrl"]);
+
 }
 
 function extractionsDatosPeople()
@@ -265,6 +279,16 @@ function extractionsDatosPeople()
     return {name, lastname, idn, tlf, address};
 }
 
+function extractionsMiniDatosPeople()
+{   
+    const name = document.getElementById("miniName").value;
+    const lastname = document.getElementById("miniLastName").value;
+    const idn = document.getElementById("miniCed").value;
+    const tlf = document.getElementById("miniTlf").value;
+    const address = document.getElementById("miniAddress").value;
+    
+    return {name, lastname, idn, tlf, address};
+}
 function extractionsDatosCar()
 {   
     const car = document.getElementById("idCar").value;
@@ -276,7 +300,17 @@ function extractionsDatosCar()
     
     return {car, year, brand, modelo, color, url};
 }
-
+function extractionsMiniDatosCar()
+{   
+    const car = document.getElementById("miniIdCar").value;
+    const year = document.getElementById("miniYear").value;
+    const brand = document.getElementById("miniSelectBrand").value;
+    const modelo = document.getElementById("miniSelectModel").value;
+    const color = document.getElementById("miniSpanColor").value;
+    const url = document.getElementById("miniUrl").value;
+    
+    return {car, year, brand, modelo, color, url};
+}
 function showRegister()
 {
     table.ClearTbody();
@@ -284,6 +318,8 @@ function showRegister()
         {
             const buttonEditar = new ButtonOptions("buttonEditar", "Editar", "#00B05D", "white",(index+1));
             const buttonDelete = new ButtonOptions("buttonDelete", "Eliminar", "#E03625", "white",(index+1));
+            const buttonEditarMini = new ButtonOptions("buttonEditarMini", "Editar", "#00B05D", "white",(index+1));
+            const buttonDeleteMini = new ButtonOptions("buttonDeleteMini", "Eliminar", "#E03625", "white",(index+1));
             buttonDelete.AddEvent(()=>
                 {
                     lista.Delete(buttonDelete.getIdRegister()-1);
@@ -297,6 +333,8 @@ function showRegister()
                   
             const tr = new Tr((index+1), item);
             tr.AddButtons(buttonEditar, buttonDelete);
+            tr.AddButtonsMini(buttonEditarMini, buttonDeleteMini);
+            console.log(tr);
             table.Add(tr.getTr(), tr.getMiniTr());
         });
 
@@ -340,14 +378,14 @@ function UpdateVehiculo(index)
     showRegister();
 
 
-    document.getElementById("name").value = "";
-    document.getElementById("lastName").value = "";
-    document.getElementById("ced").value = "";
-    document.getElementById("tlf").value = "";
-    document.getElementById("address").value = "";
-    document.getElementById("idCar").value = "";
-    document.getElementById("year").value = "";
-    document.getElementById("selectBrand").value = "";
-    document.getElementById("selectModel").value = "";
-    document.getElementById("url").value = ""; 
+    ClearCampos(["name", "lastName", "ced", "tlf", "address", "idCar", "year", "selectBrand", "selectModel", "url"])
+    ClearCampos(["miniName", "miniLastName", "miniCed", "miniTlf", "miniAddress", "miniIdCar", "miniYear", "miniColor", "miniSelectBrand", "miniSelectModel", "miniUrl"]);
+}
+
+function ClearCampos(list)
+{
+    list.forEach((item) =>
+    {
+        document.getElementById(item).value = "";
+    });
 }
