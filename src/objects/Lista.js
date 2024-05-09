@@ -13,6 +13,10 @@ export default class Lista
     {
         return this.list.indexOf(index);
     }
+    Update(index, item)
+    {
+        this.list[index] = item;
+    }
     getList()
     {
         return this.list;

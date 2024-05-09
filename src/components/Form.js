@@ -105,6 +105,8 @@ selectMarca.AddEvent(()=>
     })
 const url = new Input("url", "Imagen", "url", "https://....com");
 const register = new Button("finish", "Registrar");
+const update = new Button("update", "Editar");
+update.getButton().classList.add('hidden');
 const back = new Button("back", "Atrás");
 
 const inputCarMini = new Input("miniIdCar", "Placa", "text", "AB123CD");
@@ -130,7 +132,7 @@ const miniUrl = new Input("url", "Imagen", "url", "https://....com");
 const registerMini = new Button("miniFinish", "Registrar");
 const miniBack = new Button("miniBack", "Atrás");
 
-export const form2 = new Form([inputCar, inputYearCar, inputColor, selectMarca, selectModelo, url],[inputCarMini, inputYearCarMini, inputColorMini, selectMarcaMini, selectModeloMini, miniUrl],[back, register],[miniBack, registerMini]);
+export const form2 = new Form([inputCar, inputYearCar, inputColor, selectMarca, selectModelo, url],[inputCarMini, inputYearCarMini, inputColorMini, selectMarcaMini, selectModeloMini, miniUrl],[back, register, update],[miniBack, registerMini]);
 form2.getContainerMain().classList.add('hidden');
 form2.getFormMini().classList.add('hidden');
 
@@ -144,6 +146,7 @@ inputColor.AddEvent(ChangeColor);
 register.AddEvent((e) => validationFormCar() ? Register : e.stopImmediatePropagation())
 registerMini.AddEvent((e) => validationFormCar() ? Register : e.stopImmediatePropagation())
 register.AddEvent(Register);
+
 registerMini.AddEvent(Register);
 
 
@@ -293,6 +296,8 @@ function showRegister()
                 });
             buttonEditar.AddEvent(() => {
                     editVehicle(buttonEditar.getIdRegister() - 1);
+                    register.getButton().classList.add('hidden');
+                    update.getButton().classList.remove('hidden');
                   });
                   
             const tr = new Tr((index+1), item);
@@ -318,24 +323,36 @@ function editVehicle(index) {
     document.getElementById("ced").value = person.getIdn();
     document.getElementById("address").value = person.getAddress();
     document.getElementById("tlf").value = person.getTlf();
+    update.AddEvent((e) => validationFormCar() ? UpdateVehiculo(index) : e.stopImmediatePropagation());
 }
 
-function updateVehicle(index){
-    const vehicle = lista.getList()[index];
-    const person = vehicle.getOwn();
+function UpdateVehiculo(index)
+{
+    form2.getContainerMain().classList.add('hidden');
+    form2.getFormMini().classList.add('hidden');
 
-    vehicle.setLicensePlate(document.getElementById("idCar").value);
-    vehicle.setYearVehicle(document.getElementById("year").value);
-    vehicle.setColour(document.getElementById("inputColor").value);
-    vehicle.setBrand(document.getElementById("selectBrand").value);
-    vehicle.setModel(document.getElementById("selectModel").value);
-    vehicle.setPictureVehicle(document.getElementById("url").value);
+    form.getContainerMain().classList.remove('hidden');
+    form.getFormMini().classList.remove('hidden');
 
-    person.setName(document.getElementById("name").value);
-    person.setLastName(document.getElementById("lastName").value);
-    person.setIdn(document.getElementById("lastName").value);
-    person.setAddress(document.getElementById("address").value);
-    person.setTlf(document.getElementById("tlf").value);
+    const { name, lastname, idn, tlf, address } = extractionsDatosPeople();
+    const Persona = new People(name, lastname, idn, tlf, address);
+    const { car, year, brand, modelo, color, url } = extractionsDatosCar();
+    const Vehiculo = new Vehicle( brand, modelo, color, car, year, url)
+    Vehiculo.asigOwn(Persona);
 
-    lista.Update(index, vehicle);
+
+    lista.Update(index, Vehiculo);
+    showRegister();
+
+
+    document.getElementById("name").value = "";
+    document.getElementById("lastName").value = "";
+    document.getElementById("ced").value = "";
+    document.getElementById("tlf").value = "";
+    document.getElementById("address").value = "";
+    document.getElementById("idCar").value = "";
+    document.getElementById("year").value = "";
+    document.getElementById("selectBrand").value = "";
+    document.getElementById("selectModel").value = "";
+    document.getElementById("url").value = ""; 
 }
