@@ -2,10 +2,10 @@ import Input from "./Input.js";
 import Button from "./Button.js";
 import Select from "./Select.js";
 import Color from "./Color.js";
-import People from "../objects/Persona.js";
-import Vehicle from "../objects/Vehiculo.js";
+import People from "./Persona.js";
+import Vehicle from "./Vehiculo.js";
 import Tr from "./Tr.js";
-import Lista from "../objects/Lista.js";
+import Lista from "./Lista.js";
 import ButtonOptions from "./ButtonOptions.js";
 
 class Form 
