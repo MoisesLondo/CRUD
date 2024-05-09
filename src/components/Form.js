@@ -175,20 +175,22 @@ function validationFormCar(idCar, idYear, idColor, idSelectBrand, idSelectModel,
     const color = document.getElementById(idColor).value;
     const marca = document.getElementById(idSelectBrand).value;
     const modelo = document.getElementById(idSelectModel).value;
+    const img = document.getElementById(url).value;
+    const expresion = /^(https?|ftp):\/\/[^\s\/$.?#].[^\s]*$/
 
-    const isFormValid = (placa === "" || year === "" || color === "" || marca === "" || modelo === "" || url === "") ? false : true;
+    const isFormValid = (placa === "" || year === "" || color === "" || marca === "" || modelo === "" || img === "") ? false : true;
     const isYearValid = (year.length >= 4 && year.length <= 4) ? true : false;
     const isIdCarValid = (placa.length >= 6 && placa.length <= 7) ? true : false;
     const yearNumber = parseInt(year, 10);
     const isYearValid2 = (yearNumber >= 1960 && yearNumber <= 2024);
-    const isUrlValid = true;
+    const isUrlValid = (expresion.test(img))
 
     return(!isFormValid) ? (alert("Todos los campos son obligatorios."), false) :
     (!isYearValid) ? (alert("Ingrese el año del vehículo en formato AAAA."), false) :
     (!isYearValid2) ? (alert("Año invalido."), false) :
     (!isIdCarValid) ? (alert("Placa invalida."), false) :
     (!isUrlValid) ? (alert("La URL no es valida.")) :
-    (alert("Registrado correctamente.")), true;
+    true;
 }
 function validateInput(e) {
     const input = e.target;
