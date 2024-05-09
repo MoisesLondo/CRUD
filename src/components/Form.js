@@ -173,17 +173,22 @@ function validationFormCar(){
     const color = document.getElementById("inputColor").value
     const marca = document.getElementById("selectBrand").value
     const modelo = document.getElementById("selectModel").value
+    const url = document.getElementById("url").value
+    const expresion = /^(https?|ftp):\/\/[^\s\/$.?#].[^\s]*$/
 
-    const isFormValid = (placa === "" || year === "" || color === "" || marca === "" || modelo === "") ? false : true;
+
+    const isFormValid = (placa === "" || year === "" || color === "" || marca === "" || modelo === "" || url === "") ? false : true;
     const isYearValid = (year.length >= 4 && year.length <= 4) ? true : false;
     const isIdCarValid = (placa.length >= 6 && placa.length <= 7) ? true : false;
     const yearNumber = parseInt(year, 10);
     const isYearValid2 = (yearNumber >= 1960 && yearNumber <= 2024);
+    const isUrlValid = (expresion.test(url))
 
     return(!isFormValid) ? (alert("Todos los campos son obligatorios."), false) :
     (!isYearValid) ? (alert("Ingrese el año del vehículo en formato AAAA."), false) :
     (!isYearValid2) ? (alert("Año invalido"), false) :
     (!isIdCarValid) ? (alert("Placa invalida"), false) :
+    (!isUrlValid) ? (alert("La URL no es valida")) :
     true;
 }
 function validateInput(e) {
