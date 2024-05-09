@@ -291,9 +291,51 @@ function showRegister()
                     lista.Delete(buttonDelete.getIdRegister()-1);
                     showRegister();
                 });
+            buttonEditar.AddEvent(() => {
+                    editVehicle(buttonEditar.getIdRegister() - 1);
+                  });
+                  
             const tr = new Tr((index+1), item);
             tr.AddButtons(buttonEditar, buttonDelete);
             table.Add(tr.getTr(), tr.getMiniTr());
         });
 
+}
+
+function editVehicle(index) {
+    const vehicle = lista.getList()[index];
+    const person = vehicle.getOwn();
+    
+    document.getElementById("idCar").value = vehicle.getLicensePlate();
+    document.getElementById("year").value = vehicle.getYearVehicle();
+    document.getElementById("inputColor").value = vehicle.getColour();
+    document.getElementById("selectBrand").value = vehicle.getBrand();
+    document.getElementById("selectModel").value = vehicle.getModel();
+    document.getElementById("url").value = vehicle.getPictureVehicle();
+    
+    document.getElementById("name").value = person.getName();
+    document.getElementById("lastName").value = person.getLastName();
+    document.getElementById("ced").value = person.getIdn();
+    document.getElementById("address").value = person.getAddress();
+    document.getElementById("tlf").value = person.getTlf();
+}
+
+function updateVehicle(index){
+    const vehicle = lista.getList()[index];
+    const person = vehicle.getOwn();
+
+    vehicle.setLicensePlate(document.getElementById("idCar").value);
+    vehicle.setYearVehicle(document.getElementById("year").value);
+    vehicle.setColour(document.getElementById("inputColor").value);
+    vehicle.setBrand(document.getElementById("selectBrand").value);
+    vehicle.setModel(document.getElementById("selectModel").value);
+    vehicle.setPictureVehicle(document.getElementById("url").value);
+
+    person.setName(document.getElementById("name").value);
+    person.setLastName(document.getElementById("lastName").value);
+    person.setIdn(document.getElementById("lastName").value);
+    person.setAddress(document.getElementById("address").value);
+    person.setTlf(document.getElementById("tlf").value);
+
+    lista.Update(index, vehicle);
 }

@@ -29,4 +29,23 @@ export default class People
     {
         return this.address;
     }
-}
+    setName(newName) {
+        this.name = newName;
+      }
+    
+      setLastName(newLastName) {
+        this.lastName = newLastName;
+      }
+    
+      setIdn(newIdn) {
+        this.idn = newIdn;
+      }
+    
+      setTlf(newTlf) {
+        this.tlf = newTlf;
+      }
+    
+      setAddress(newAddress) {
+        this.address = newAddress;
+      }
+    }
